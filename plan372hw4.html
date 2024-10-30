@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>plan372hw4part1again</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="plan372hw4part1again_files/libs/clipboard/clipboard.min.js"></script>
+<script src="plan372hw4part1again_files/libs/quarto-html/quarto.js"></script>
+<script src="plan372hw4part1again_files/libs/quarto-html/popper.min.js"></script>
+<script src="plan372hw4part1again_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="plan372hw4part1again_files/libs/quarto-html/anchor.min.js"></script>
+<link href="plan372hw4part1again_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="plan372hw4part1again_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="plan372hw4part1again_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="plan372hw4part1again_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="plan372hw4part1again_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<p>title: “NamitMiglani HW4” author: “NamitMiglani” output: html_document</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /Users/namitmiglani/plan372/plan372-hw4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>install.packages(“dplyr”) install.packages(“here”)</p>
+<p>install.packages(“tibble”)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>air_traffic <span class="ot">=</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"airport_pairs.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 9502 Columns: 10
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): origin, dest, origin_name, origin_cbsa_name, dest_name, dest_cbsa_name
+dbl (4): passengers, distancemiles, origin_cbsa, dest_cbsa
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rdu_routes <span class="ot">=</span> air_traffic <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(origin <span class="sc">==</span> <span class="st">"RDU"</span> <span class="sc">|</span> dest <span class="sc">==</span> <span class="st">"RDU"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_passengers =</span> <span class="fu">sum</span>(passengers, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(total_passengers <span class="sc">&gt;</span> <span class="dv">10000</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rdu_routes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 2
+   dest  total_passengers
+   &lt;chr&gt;            &lt;dbl&gt;
+ 1 ATL             540190
+ 2 AUS             101110
+ 3 BNA             141990
+ 4 BOS             215960
+ 5 BWI             130900
+ 6 CLT             370480
+ 7 DAL              46530
+ 8 DCA             129930
+ 9 DEN             226520
+10 DFW             215960
+# ℹ 25 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cbsa_data <span class="ot">=</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"cbsa"</span>, <span class="at">variables =</span> <span class="st">"B01003_001"</span> , <span class="at">year =</span> <span class="dv">2021</span>, <span class="at">survey =</span> <span class="st">"acs5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Getting data from the 2017-2021 5-year ACS</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cbsa_data<span class="ot">=</span> cbsa_data <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">cbsa_code =</span> GEOID, <span class="at">cbsa_pop =</span> estimate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>origin_data <span class="ot">=</span> cbsa_data <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">origin_cbsa_pop =</span> cbsa_pop, <span class="at">origin_cbsa =</span> cbsa_code)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dest_data <span class="ot">=</span> cbsa_data <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">dest_cbsa_pop =</span> cbsa_pop, <span class="at">dest_cbsa =</span> cbsa_code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>air_traffic <span class="ot">=</span> air_traffic <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">origin_cbsa =</span> <span class="fu">as.character</span>(origin_cbsa),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dest_cbsa =</span> <span class="fu">as.character</span>(dest_cbsa))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  origin_data <span class="ot">=</span> origin_data <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">origin_cbda =</span> <span class="fu">as.character</span>(origin_cbsa))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  dest_data <span class="ot">=</span> dest_data <span class="sc">|&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">dest_cbsa =</span> <span class="fu">as.character</span>(dest_cbsa))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  cbsa_data <span class="ot">=</span> cbsa_data <span class="sc">|&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cbsa_code =</span> <span class="fu">as.character</span>(cbsa_code))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>air_traffic_cbsa <span class="ot">=</span> air_traffic <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(origin_data, <span class="at">by =</span> <span class="st">"origin_cbsa"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(dest_data, <span class="at">by =</span> <span class="st">"dest_cbsa"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(origin_cbsa, dest_cbsa) <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarize</span>(<span class="at">total_passengers =</span> <span class="fu">sum</span> (passengers, <span class="at">na.rm =</span> T), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>passenger_summary <span class="ot">=</span> air_traffic <span class="sc">|&gt;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin_cbsa, dest_cbsa) <span class="sc">|&gt;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_passengers =</span> <span class="fu">sum</span>(passengers, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>distance_data <span class="ot">=</span> air_traffic <span class="sc">|&gt;</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(origin_cbsa, dest_cbsa, distancemiles)<span class="sc">|&gt;</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Join the passenger summary with distance data</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>air_traffic_cbsa <span class="ot">=</span> passenger_summary <span class="sc">|&gt;</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(distance_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"origin_cbsa"</span>, <span class="st">"dest_cbsa"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(air_traffic_cbsa, <span class="fu">aes</span>(<span class="at">x =</span> origin_cbsa , <span class="at">y =</span> total_passengers)) <span class="sc">+</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Origin Population vs Total Passengers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="plan372hw4part1again_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(air_traffic_cbsa, <span class="fu">aes</span>(<span class="at">x =</span> dest_cbsa, <span class="at">y =</span> total_passengers)) <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Destination Population vs Total Passengers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="plan372hw4part1again_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(air_traffic_cbsa, <span class="fu">aes</span>(<span class="at">x =</span> distancemiles, <span class="at">y =</span> total_passengers)) <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance vs Total Passengers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="plan372hw4part1again_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">lm</span>(total_passengers <span class="sc">~</span> origin_cbsa <span class="sc">+</span> dest_cbsa <span class="sc">+</span> distancemiles, <span class="at">data =</span> air_traffic_cbsa)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = total_passengers ~ origin_cbsa + dest_cbsa + distancemiles, 
+    data = air_traffic_cbsa)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1507415  -116521   -13537    97350  4013408 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      -2.775e+05  4.690e+05  -0.592  0.55408    
+origin_cbsa10180 -1.528e+05  4.058e+05  -0.377  0.70647    
+origin_cbsa10380 -1.358e+05  3.632e+05  -0.374  0.70849    
+origin_cbsa10420  5.302e+02  3.495e+05   0.002  0.99879    
+origin_cbsa10500 -2.609e+05  4.688e+05  -0.557  0.57783    
+origin_cbsa10580  9.831e+04  3.347e+05   0.294  0.76899    
+origin_cbsa10740  1.524e+05  3.338e+05   0.456  0.64806    
+origin_cbsa10780 -1.454e+05  3.706e+05  -0.392  0.69480    
+origin_cbsa10900 -1.675e+05  3.581e+05  -0.468  0.63996    
+origin_cbsa10980  6.999e+04  3.879e+05   0.180  0.85682    
+origin_cbsa11100  2.022e+04  3.360e+05   0.060  0.95201    
+origin_cbsa11260  2.137e+05  3.401e+05   0.628  0.52977    
+origin_cbsa11540 -1.136e+04  3.543e+05  -0.032  0.97443    
+origin_cbsa11700 -1.399e+05  3.439e+05  -0.407  0.68420    
+origin_cbsa12060  5.877e+05  3.327e+05   1.767  0.07733 .  
+origin_cbsa12100 -2.705e+04  3.464e+05  -0.078  0.93775    
+origin_cbsa12260 -1.451e+05  3.477e+05  -0.417  0.67642    
+origin_cbsa12300 -1.209e+05  4.692e+05  -0.258  0.79662    
+origin_cbsa12420  2.861e+05  3.332e+05   0.858  0.39066    
+origin_cbsa12540 -1.244e+05  3.706e+05  -0.336  0.73706    
+origin_cbsa12580  2.836e+05  3.332e+05   0.851  0.39472    
+origin_cbsa12620 -1.645e+05  3.478e+05  -0.473  0.63626    
+origin_cbsa12700 -2.832e+05  3.832e+05  -0.739  0.45990    
+origin_cbsa12940 -7.436e+04  3.631e+05  -0.205  0.83776    
+origin_cbsa13140 -2.367e+05  4.684e+05  -0.505  0.61329    
+origin_cbsa13380  1.382e+03  3.402e+05   0.004  0.99676    
+origin_cbsa13420  1.014e+05  4.266e+05   0.238  0.81213    
+origin_cbsa13460 -1.703e+04  3.451e+05  -0.049  0.96065    
+origin_cbsa13740 -4.176e+04  3.514e+05  -0.119  0.90539    
+origin_cbsa13780  1.918e+04  4.690e+05   0.041  0.96738    
+origin_cbsa13820  1.045e+05  3.346e+05   0.312  0.75477    
+origin_cbsa13900 -6.374e+04  3.701e+05  -0.172  0.86325    
+origin_cbsa14010 -1.022e+05  3.517e+05  -0.291  0.77138    
+origin_cbsa14260  1.266e+05  3.349e+05   0.378  0.70541    
+origin_cbsa14460  4.100e+05  3.333e+05   1.230  0.21866    
+origin_cbsa14580  6.940e+04  3.346e+05   0.207  0.83568    
+origin_cbsa14660 -2.123e+04  4.671e+05  -0.045  0.96374    
+origin_cbsa14700 -1.526e+05  4.687e+05  -0.325  0.74483    
+origin_cbsa15180  9.299e+04  3.348e+05   0.278  0.78120    
+origin_cbsa15260 -2.481e+05  4.688e+05  -0.529  0.59656    
+origin_cbsa15380  1.091e+05  3.340e+05   0.327  0.74402    
+origin_cbsa15460 -8.543e+04  4.060e+05  -0.210  0.83334    
+origin_cbsa15540 -1.765e+04  3.411e+05  -0.052  0.95874    
+origin_cbsa15580 -8.742e+04  4.061e+05  -0.215  0.82957    
+origin_cbsa15980  2.441e+05  3.336e+05   0.732  0.46448    
+origin_cbsa16060  5.780e+04  4.063e+05   0.142  0.88686    
+origin_cbsa16220 -8.601e+04  4.061e+05  -0.212  0.83227    
+origin_cbsa16260 -2.593e+04  4.691e+05  -0.055  0.95592    
+origin_cbsa16300  2.297e+04  3.451e+05   0.067  0.94693    
+origin_cbsa16580 -1.639e+05  3.827e+05  -0.428  0.66842    
+origin_cbsa16620 -1.099e+04  3.520e+05  -0.031  0.97510    
+origin_cbsa16700  1.308e+05  3.342e+05   0.391  0.69545    
+origin_cbsa16740  4.176e+05  3.328e+05   1.255  0.20957    
+origin_cbsa16820 -9.393e+04  3.546e+05  -0.265  0.79111    
+origin_cbsa16860 -1.256e+05  3.544e+05  -0.354  0.72315    
+origin_cbsa16940 -2.169e+05  4.687e+05  -0.463  0.64350    
+origin_cbsa16980  5.461e+05  3.322e+05   1.644  0.10026    
+origin_cbsa17140  9.098e+04  3.344e+05   0.272  0.78558    
+origin_cbsa17220 -7.296e+03  3.886e+05  -0.019  0.98502    
+origin_cbsa17460  1.251e+05  3.341e+05   0.374  0.70814    
+origin_cbsa17780 -2.764e+04  3.829e+05  -0.072  0.94245    
+origin_cbsa17820  1.012e+05  3.340e+05   0.303  0.76181    
+origin_cbsa17860 -1.968e+05  4.058e+05  -0.485  0.62777    
+origin_cbsa17900 -8.855e+04  3.478e+05  -0.255  0.79906    
+origin_cbsa17980 -1.803e+05  3.828e+05  -0.471  0.63755    
+origin_cbsa18060 -2.450e+05  4.688e+05  -0.523  0.60129    
+origin_cbsa18140  1.559e+05  3.335e+05   0.467  0.64018    
+origin_cbsa18300 -1.476e+05  4.059e+05  -0.364  0.71608    
+origin_cbsa18580 -7.706e+03  3.373e+05  -0.023  0.98177    
+origin_cbsa18880  9.165e+04  3.353e+05   0.273  0.78457    
+origin_cbsa19100  5.694e+05  3.322e+05   1.714  0.08658 .  
+origin_cbsa19340 -1.359e+05  3.627e+05  -0.375  0.70780    
+origin_cbsa19430 -1.056e+05  3.495e+05  -0.302  0.76247    
+origin_cbsa19500  1.015e+05  3.992e+05   0.254  0.79925    
+origin_cbsa19620 -2.265e+05  4.684e+05  -0.484  0.62874    
+origin_cbsa19660 -2.845e+04  3.581e+05  -0.079  0.93667    
+origin_cbsa19740  5.155e+05  3.326e+05   1.550  0.12127    
+origin_cbsa19780  2.887e+04  3.362e+05   0.086  0.93158    
+origin_cbsa19820  3.135e+05  3.330e+05   0.941  0.34660    
+origin_cbsa19860 -1.599e+05  4.687e+05  -0.341  0.73305    
+origin_cbsa19980  2.807e+04  4.278e+05   0.066  0.94769    
+origin_cbsa20220 -2.385e+05  4.684e+05  -0.509  0.61069    
+origin_cbsa20260  2.201e+04  3.624e+05   0.061  0.95156    
+origin_cbsa20420 -1.211e+05  3.632e+05  -0.333  0.73885    
+origin_cbsa20740 -1.377e+05  4.049e+05  -0.340  0.73377    
+origin_cbsa20780 -1.833e+05  3.441e+05  -0.533  0.59432    
+origin_cbsa21220 -3.164e+04  4.691e+05  -0.067  0.94623    
+origin_cbsa21300  4.027e+04  4.690e+05   0.086  0.93156    
+origin_cbsa21340  1.426e+05  3.341e+05   0.427  0.66942    
+origin_cbsa21500 -1.128e+05  3.827e+05  -0.295  0.76815    
+origin_cbsa21540  4.874e+01  4.051e+05   0.000  0.99990    
+origin_cbsa21660  7.189e+04  3.363e+05   0.214  0.83074    
+origin_cbsa21700 -1.817e+05  3.581e+05  -0.507  0.61194    
+origin_cbsa21780 -1.362e+05  3.631e+05  -0.375  0.70755    
+origin_cbsa21820  1.890e+05  3.562e+05   0.531  0.59574    
+origin_cbsa22020 -5.592e+04  3.577e+05  -0.156  0.87577    
+origin_cbsa22180 -1.339e+05  3.828e+05  -0.350  0.72640    
+origin_cbsa22220 -8.858e+04  3.417e+05  -0.259  0.79543    
+origin_cbsa22380 -1.487e+05  3.828e+05  -0.389  0.69764    
+origin_cbsa22420 -1.112e+05  4.059e+05  -0.274  0.78407    
+origin_cbsa22500 -1.019e+05  4.688e+05  -0.217  0.82794    
+origin_cbsa22660 -2.263e+05  3.828e+05  -0.591  0.55447    
+origin_cbsa22700 -5.917e+04  3.921e+05  -0.151  0.88006    
+origin_cbsa22780 -1.436e+04  4.207e+05  -0.034  0.97277    
+origin_cbsa22900 -2.125e+05  4.684e+05  -0.454  0.65003    
+origin_cbsa23060 -8.078e+04  3.541e+05  -0.228  0.81955    
+origin_cbsa23420  1.032e+05  3.366e+05   0.307  0.75907    
+origin_cbsa23540 -1.862e+05  3.706e+05  -0.502  0.61547    
+origin_cbsa23780 -2.166e+05  4.684e+05  -0.462  0.64382    
+origin_cbsa23940 -1.807e+05  4.687e+05  -0.385  0.69991    
+origin_cbsa24060 -1.235e+05  3.477e+05  -0.355  0.72240    
+origin_cbsa24220  3.466e+04  4.671e+05   0.074  0.94085    
+origin_cbsa24260 -1.980e+05  4.684e+05  -0.423  0.67260    
+origin_cbsa24300 -9.927e+04  3.707e+05  -0.268  0.78884    
+origin_cbsa24340  6.345e+04  3.355e+05   0.189  0.84998    
+origin_cbsa24500 -5.958e+04  3.627e+05  -0.164  0.86954    
+origin_cbsa24580 -5.450e+04  3.430e+05  -0.159  0.87377    
+origin_cbsa24660 -1.458e+05  3.451e+05  -0.423  0.67263    
+origin_cbsa24780 -8.904e+04  4.688e+05  -0.190  0.84938    
+origin_cbsa25060 -7.337e+04  3.627e+05  -0.202  0.83969    
+origin_cbsa25200 -1.468e+05  3.581e+05  -0.410  0.68190    
+origin_cbsa25420 -7.277e+04  3.451e+05  -0.211  0.83300    
+origin_cbsa25540  1.447e+05  3.343e+05   0.433  0.66523    
+origin_cbsa25700 -2.837e+04  3.886e+05  -0.073  0.94181    
+origin_cbsa25740 -8.863e+04  3.829e+05  -0.231  0.81694    
+origin_cbsa25840 -3.616e+03  4.693e+05  -0.008  0.99385    
+origin_cbsa25900  2.483e+05  3.379e+05   0.735  0.46248    
+origin_cbsa25940 -1.337e+05  3.463e+05  -0.386  0.69947    
+origin_cbsa26020 -1.183e+05  4.059e+05  -0.291  0.77071    
+origin_cbsa26340 -2.138e+05  4.684e+05  -0.456  0.64814    
+origin_cbsa26420  4.095e+05  3.323e+05   1.232  0.21796    
+origin_cbsa26580 -8.898e+04  4.688e+05  -0.190  0.84948    
+origin_cbsa26620 -9.586e+04  3.441e+05  -0.279  0.78055    
+origin_cbsa26820 -4.725e+04  3.582e+05  -0.132  0.89503    
+origin_cbsa26900  1.496e+05  3.337e+05   0.448  0.65401    
+origin_cbsa27020 -8.612e+02  4.051e+05  -0.002  0.99830    
+origin_cbsa27060 -5.677e+04  3.587e+05  -0.158  0.87426    
+origin_cbsa27140  2.825e+04  3.354e+05   0.084  0.93289    
+origin_cbsa27220 -9.638e+04  3.410e+05  -0.283  0.77750    
+origin_cbsa27260  1.311e+05  3.341e+05   0.392  0.69479    
+origin_cbsa27340 -1.194e+05  4.060e+05  -0.294  0.76866    
+origin_cbsa27420 -1.621e+05  4.687e+05  -0.346  0.72953    
+origin_cbsa27780 -8.940e+03  3.886e+05  -0.023  0.98164    
+origin_cbsa27900 -1.488e+05  3.827e+05  -0.389  0.69743    
+origin_cbsa27940  1.335e+05  3.750e+05   0.356  0.72186    
+origin_cbsa27980  3.475e+05  3.372e+05   1.030  0.30286    
+origin_cbsa28020 -1.069e+05  4.059e+05  -0.263  0.79222    
+origin_cbsa28060 -5.020e+04  3.439e+05  -0.146  0.88396    
+origin_cbsa28140  1.728e+05  3.334e+05   0.518  0.60435    
+origin_cbsa28180  2.873e+05  3.401e+05   0.845  0.39827    
+origin_cbsa28260 -1.939e+05  4.059e+05  -0.478  0.63279    
+origin_cbsa28420 -6.785e+04  3.577e+05  -0.190  0.84958    
+origin_cbsa28540  9.069e+04  3.750e+05   0.242  0.80891    
+origin_cbsa28580 -1.259e+05  3.418e+05  -0.368  0.71262    
+origin_cbsa28660 -1.456e+05  4.058e+05  -0.359  0.71979    
+origin_cbsa28700 -1.494e+05  3.828e+05  -0.390  0.69627    
+origin_cbsa28860  8.286e+04  4.692e+05   0.177  0.85982    
+origin_cbsa28940 -7.681e+04  3.423e+05  -0.224  0.82244    
+origin_cbsa29100 -6.920e+04  3.820e+05  -0.181  0.85627    
+origin_cbsa29180 -1.162e+05  3.706e+05  -0.313  0.75395    
+origin_cbsa29340 -1.604e+05  4.058e+05  -0.395  0.69264    
+origin_cbsa29620 -8.827e+04  3.827e+05  -0.231  0.81762    
+origin_cbsa29660 -2.127e+05  4.687e+05  -0.454  0.64995    
+origin_cbsa29700 -1.290e+05  4.058e+05  -0.318  0.75063    
+origin_cbsa29820  5.164e+05  3.331e+05   1.550  0.12107    
+origin_cbsa29860  6.316e+04  4.277e+05   0.148  0.88260    
+origin_cbsa30020 -2.352e+05  4.684e+05  -0.502  0.61567    
+origin_cbsa30100 -1.255e+05  4.692e+05  -0.268  0.78906    
+origin_cbsa30300 -5.719e+04  4.061e+05  -0.141  0.88801    
+origin_cbsa30460 -5.303e+04  3.475e+05  -0.153  0.87871    
+origin_cbsa30580  2.737e+04  4.278e+05   0.064  0.94899    
+origin_cbsa30700  7.657e+04  3.499e+05   0.219  0.82679    
+origin_cbsa30780  5.571e+04  3.348e+05   0.166  0.86782    
+origin_cbsa30980 -2.522e+05  4.684e+05  -0.538  0.59028    
+origin_cbsa31080  6.673e+05  3.321e+05   2.009  0.04453 *  
+origin_cbsa31140  8.277e+04  3.344e+05   0.248  0.80449    
+origin_cbsa31180  8.604e+04  3.351e+05   0.257  0.79738    
+origin_cbsa31340 -5.017e+04  4.688e+05  -0.107  0.91478    
+origin_cbsa31540 -1.494e+04  3.374e+05  -0.044  0.96469    
+origin_cbsa31660 -1.131e+05  4.691e+05  -0.241  0.80956    
+origin_cbsa31700  1.261e+05  3.347e+05   0.377  0.70640    
+origin_cbsa31740 -1.933e+05  4.058e+05  -0.476  0.63390    
+origin_cbsa31860 -5.049e+04  4.671e+05  -0.108  0.91393    
+origin_cbsa32100 -6.900e+04  3.820e+05  -0.181  0.85667    
+origin_cbsa32380  5.110e+04  4.190e+05   0.122  0.90293    
+origin_cbsa32420 -2.796e+04  4.702e+05  -0.059  0.95259    
+origin_cbsa32580 -6.186e+04  3.827e+05  -0.162  0.87159    
+origin_cbsa32780 -4.925e+04  3.451e+05  -0.143  0.88654    
+origin_cbsa32820  9.228e+04  3.341e+05   0.276  0.78241    
+origin_cbsa32940  7.102e+04  4.277e+05   0.166  0.86813    
+origin_cbsa33100  7.394e+05  3.323e+05   2.225  0.02608 *  
+origin_cbsa33260  5.868e+04  3.348e+05   0.175  0.86087    
+origin_cbsa33340  1.322e+05  3.336e+05   0.396  0.69187    
+origin_cbsa33460  3.354e+05  3.330e+05   1.007  0.31376    
+origin_cbsa33500 -3.503e+04  4.050e+05  -0.086  0.93107    
+origin_cbsa33540 -5.410e+04  3.475e+05  -0.156  0.87629    
+origin_cbsa33660 -1.061e+05  3.706e+05  -0.286  0.77466    
+origin_cbsa33740 -1.787e+05  3.827e+05  -0.467  0.64049    
+origin_cbsa33860 -8.995e+04  3.632e+05  -0.248  0.80438    
+origin_cbsa33940 -5.933e+04  3.377e+05  -0.176  0.86054    
+origin_cbsa34740 -2.507e+05  4.684e+05  -0.535  0.59250    
+origin_cbsa34820  1.062e+05  3.343e+05   0.318  0.75073    
+origin_cbsa34980  2.531e+05  3.332e+05   0.759  0.44759    
+origin_cbsa35100 -6.735e+04  4.060e+05  -0.166  0.86825    
+origin_cbsa35300  9.910e+04  3.433e+05   0.289  0.77286    
+origin_cbsa35380  2.073e+05  3.334e+05   0.622  0.53411    
+origin_cbsa35620  8.904e+05  3.321e+05   2.681  0.00735 ** 
+origin_cbsa35820  3.373e+04  4.278e+05   0.079  0.93716    
+origin_cbsa35840  1.327e+05  3.342e+05   0.397  0.69131    
+origin_cbsa36260 -3.142e+05  4.683e+05  -0.671  0.50238    
+origin_cbsa36300  3.061e+03  3.886e+05   0.008  0.99371    
+origin_cbsa36420  1.338e+05  3.337e+05   0.401  0.68841    
+origin_cbsa36540  1.049e+05  3.337e+05   0.314  0.75326    
+origin_cbsa36740  5.047e+05  3.330e+05   1.516  0.12964    
+origin_cbsa36980  5.939e+04  4.063e+05   0.146  0.88378    
+origin_cbsa37120 -2.521e+05  4.688e+05  -0.538  0.59077    
+origin_cbsa37140  1.225e+03  4.165e+05   0.003  0.99765    
+origin_cbsa37340 -8.532e+04  3.706e+05  -0.230  0.81794    
+origin_cbsa37460  1.188e+05  3.345e+05   0.355  0.72250    
+origin_cbsa37860  7.563e+04  3.347e+05   0.226  0.82124    
+origin_cbsa37900 -1.375e+05  3.827e+05  -0.359  0.71946    
+origin_cbsa37980  3.272e+05  3.330e+05   0.983  0.32582    
+origin_cbsa38060  4.743e+05  3.329e+05   1.425  0.15424    
+origin_cbsa38180 -1.905e+05  4.687e+05  -0.407  0.68436    
+origin_cbsa38300  1.397e+05  3.338e+05   0.419  0.67554    
+origin_cbsa38460  1.260e+04  3.886e+05   0.032  0.97414    
+origin_cbsa38540 -3.646e+04  4.691e+05  -0.078  0.93805    
+origin_cbsa38660 -2.010e+05  4.060e+05  -0.495  0.62063    
+origin_cbsa38860  8.150e+04  3.350e+05   0.243  0.80779    
+origin_cbsa38900  3.033e+05  3.335e+05   0.910  0.36311    
+origin_cbsa39100 -1.161e+05  3.582e+05  -0.324  0.74589    
+origin_cbsa39150 -2.603e+05  4.059e+05  -0.641  0.52130    
+origin_cbsa39300  1.329e+05  3.345e+05   0.397  0.69116    
+origin_cbsa39380 -2.197e+05  4.687e+05  -0.469  0.63925    
+origin_cbsa39420  3.714e+03  4.064e+05   0.009  0.99271    
+origin_cbsa39460  1.272e+05  4.671e+05   0.272  0.78546    
+origin_cbsa39500 -8.626e+04  4.060e+05  -0.212  0.83176    
+origin_cbsa39580  2.100e+05  3.335e+05   0.630  0.52886    
+origin_cbsa39660 -5.283e+04  3.450e+05  -0.153  0.87831    
+origin_cbsa39820 -2.254e+05  3.632e+05  -0.621  0.53488    
+origin_cbsa39900  1.704e+05  3.341e+05   0.510  0.61013    
+origin_cbsa40060  6.256e+04  3.354e+05   0.187  0.85202    
+origin_cbsa40140  2.293e+05  3.330e+05   0.689  0.49103    
+origin_cbsa40180 -1.927e+05  4.687e+05  -0.411  0.68099    
+origin_cbsa40220 -9.448e+04  3.546e+05  -0.266  0.78992    
+origin_cbsa40340 -6.956e+04  3.577e+05  -0.194  0.84582    
+origin_cbsa40380  8.796e+03  3.356e+05   0.026  0.97909    
+origin_cbsa40540 -1.956e+05  4.687e+05  -0.417  0.67644    
+origin_cbsa40740 -1.628e+05  4.059e+05  -0.401  0.68844    
+origin_cbsa40860 -1.236e+05  4.692e+05  -0.263  0.79218    
+origin_cbsa40900  2.897e+05  3.336e+05   0.868  0.38523    
+origin_cbsa40980 -1.030e+05  4.059e+05  -0.254  0.79980    
+origin_cbsa41100 -1.060e+05  3.707e+05  -0.286  0.77495    
+origin_cbsa41180  2.005e+05  3.333e+05   0.602  0.54746    
+origin_cbsa41460 -2.562e+04  3.886e+05  -0.066  0.94743    
+origin_cbsa41500 -1.321e+05  3.544e+05  -0.373  0.70938    
+origin_cbsa41540 -4.457e+04  4.061e+05  -0.110  0.91260    
+origin_cbsa41620  3.350e+05  3.332e+05   1.005  0.31476    
+origin_cbsa41660 -1.543e+05  4.058e+05  -0.380  0.70382    
+origin_cbsa41700  1.881e+05  3.334e+05   0.564  0.57272    
+origin_cbsa41740  3.561e+05  3.333e+05   1.068  0.28545    
+origin_cbsa41860  5.365e+05  3.325e+05   1.613  0.10672    
+origin_cbsa41940  2.948e+05  3.336e+05   0.884  0.37696    
+origin_cbsa41980  3.152e+05  3.345e+05   0.942  0.34608    
+origin_cbsa42020 -1.059e+05  3.517e+05  -0.301  0.76325    
+origin_cbsa42140 -1.512e+05  3.828e+05  -0.395  0.69292    
+origin_cbsa42200  1.209e+05  3.355e+05   0.360  0.71856    
+origin_cbsa42220 -1.300e+05  3.478e+05  -0.374  0.70854    
+origin_cbsa42300  7.841e+04  3.879e+05   0.202  0.83983    
+origin_cbsa42340  8.825e+04  3.346e+05   0.264  0.79200    
+origin_cbsa42420  2.347e+04  4.278e+05   0.055  0.95626    
+origin_cbsa42540 -2.005e+05  3.706e+05  -0.541  0.58855    
+origin_cbsa42660  4.940e+05  3.331e+05   1.483  0.13814    
+origin_cbsa43260 -1.766e+05  4.687e+05  -0.377  0.70631    
+origin_cbsa43340 -1.187e+05  3.631e+05  -0.327  0.74375    
+origin_cbsa43460  4.985e+04  3.811e+05   0.131  0.89595    
+origin_cbsa43580 -1.946e+05  4.059e+05  -0.479  0.63160    
+origin_cbsa43620 -3.337e+04  3.475e+05  -0.096  0.92351    
+origin_cbsa43780 -5.051e+04  3.432e+05  -0.147  0.88300    
+origin_cbsa43900  2.004e+04  3.355e+05   0.060  0.95237    
+origin_cbsa44060  1.540e+05  3.346e+05   0.460  0.64540    
+origin_cbsa44100  8.858e+03  3.839e+05   0.023  0.98159    
+origin_cbsa44180 -1.060e+05  3.581e+05  -0.296  0.76726    
+origin_cbsa44300 -7.818e+04  3.584e+05  -0.218  0.82736    
+origin_cbsa44420 -1.551e+05  4.058e+05  -0.382  0.70242    
+origin_cbsa44460 -3.004e+04  3.376e+05  -0.089  0.92910    
+origin_cbsa44660 -2.422e+05  4.684e+05  -0.517  0.60515    
+origin_cbsa45060  6.617e+04  3.356e+05   0.197  0.84368    
+origin_cbsa45220 -1.518e+05  3.544e+05  -0.428  0.66839    
+origin_cbsa45300  3.249e+05  3.332e+05   0.975  0.32951    
+origin_cbsa45500 -1.720e+05  4.058e+05  -0.424  0.67180    
+origin_cbsa45780 -1.576e+05  4.059e+05  -0.388  0.69776    
+origin_cbsa45900 -6.165e+04  3.416e+05  -0.180  0.85681    
+origin_cbsa45940 -7.190e+04  3.478e+05  -0.207  0.83620    
+origin_cbsa46060  1.319e+05  3.345e+05   0.394  0.69340    
+origin_cbsa46140  1.013e+05  3.341e+05   0.303  0.76180    
+origin_cbsa46300 -1.733e+05  3.632e+05  -0.477  0.63332    
+origin_cbsa46340 -2.393e+05  4.684e+05  -0.511  0.60940    
+origin_cbsa46520  4.337e+05  3.362e+05   1.290  0.19707    
+origin_cbsa46660 -2.510e+05  4.688e+05  -0.535  0.59233    
+origin_cbsa46860 -2.005e+05  4.687e+05  -0.428  0.66881    
+origin_cbsa47020 -1.162e+05  4.685e+05  -0.248  0.80408    
+origin_cbsa47240 -2.612e+05  3.517e+05  -0.743  0.45759    
+origin_cbsa47260  7.964e+04  3.345e+05   0.238  0.81183    
+origin_cbsa47380 -2.324e+05  4.684e+05  -0.496  0.61980    
+origin_cbsa47460 -1.569e+05  4.690e+05  -0.335  0.73794    
+origin_cbsa47900  3.903e+05  3.323e+05   1.174  0.24023    
+origin_cbsa47940 -2.327e+05  4.684e+05  -0.497  0.61935    
+origin_cbsa47980 -1.943e+05  4.059e+05  -0.479  0.63221    
+origin_cbsa48060  5.553e+03  4.690e+05   0.012  0.99055    
+origin_cbsa48140 -6.670e+04  3.820e+05  -0.175  0.86141    
+origin_cbsa48300 -1.705e+05  4.690e+05  -0.363  0.71628    
+origin_cbsa48620  7.607e+03  3.362e+05   0.023  0.98195    
+origin_cbsa48660 -2.498e+05  4.684e+05  -0.533  0.59389    
+origin_cbsa48900 -1.041e+05  3.441e+05  -0.303  0.76224    
+origin_cbsa49340 -3.609e+05  3.707e+05  -0.974  0.33025    
+origin_cbsa49420 -1.707e+05  4.690e+05  -0.364  0.71595    
+origin_cbsa49740 -1.241e+05  4.059e+05  -0.306  0.75982    
+dest_cbsa10180   -2.048e+05  4.685e+05  -0.437  0.66207    
+dest_cbsa10380   -1.323e+05  3.633e+05  -0.364  0.71573    
+dest_cbsa10420    5.029e+03  3.496e+05   0.014  0.98852    
+dest_cbsa10500   -2.589e+05  4.688e+05  -0.552  0.58086    
+dest_cbsa10580    1.131e+05  3.346e+05   0.338  0.73523    
+dest_cbsa10740    1.469e+05  3.338e+05   0.440  0.65996    
+dest_cbsa10780   -1.437e+05  3.707e+05  -0.388  0.69836    
+dest_cbsa10900   -8.862e+04  3.550e+05  -0.250  0.80290    
+dest_cbsa10980    7.131e+04  3.879e+05   0.184  0.85416    
+dest_cbsa11100    3.153e+04  3.357e+05   0.094  0.92517    
+dest_cbsa11260    2.415e+05  3.394e+05   0.711  0.47687    
+dest_cbsa11540   -7.105e+04  3.578e+05  -0.199  0.84258    
+dest_cbsa11700   -1.348e+05  3.440e+05  -0.392  0.69521    
+dest_cbsa12060    5.902e+05  3.328e+05   1.773  0.07618 .  
+dest_cbsa12100   -2.489e+04  3.465e+05  -0.072  0.94273    
+dest_cbsa12260   -1.405e+05  3.478e+05  -0.404  0.68619    
+dest_cbsa12300   -1.136e+05  4.693e+05  -0.242  0.80880    
+dest_cbsa12420    2.893e+05  3.333e+05   0.868  0.38533    
+dest_cbsa12540   -1.256e+05  3.707e+05  -0.339  0.73475    
+dest_cbsa12580    2.985e+05  3.333e+05   0.896  0.37051    
+dest_cbsa12620   -1.592e+05  3.479e+05  -0.458  0.64729    
+dest_cbsa12700   -2.766e+05  3.833e+05  -0.722  0.47057    
+dest_cbsa12940   -2.271e+04  3.582e+05  -0.063  0.94945    
+dest_cbsa13140   -2.355e+05  4.685e+05  -0.503  0.61522    
+dest_cbsa13380    5.537e+03  3.426e+05   0.016  0.98710    
+dest_cbsa13420   -2.707e+03  4.671e+05  -0.006  0.99538    
+dest_cbsa13460   -5.427e+04  3.464e+05  -0.157  0.87551    
+dest_cbsa13740   -3.868e+04  3.514e+05  -0.110  0.91235    
+dest_cbsa13780    2.234e+04  4.690e+05   0.048  0.96201    
+dest_cbsa13820    8.777e+04  3.345e+05   0.262  0.79303    
+dest_cbsa13900   -6.290e+04  3.701e+05  -0.170  0.86506    
+dest_cbsa14010   -9.986e+04  3.517e+05  -0.284  0.77650    
+dest_cbsa14260    1.716e+05  3.343e+05   0.513  0.60783    
+dest_cbsa14460    4.173e+05  3.333e+05   1.252  0.21067    
+dest_cbsa14580    8.377e+04  3.346e+05   0.250  0.80229    
+dest_cbsa14660    8.242e+04  4.266e+05   0.193  0.84682    
+dest_cbsa14700   -1.488e+05  4.688e+05  -0.318  0.75086    
+dest_cbsa15180    7.462e+04  3.351e+05   0.223  0.82381    
+dest_cbsa15260   -2.452e+05  4.688e+05  -0.523  0.60096    
+dest_cbsa15380    1.100e+05  3.343e+05   0.329  0.74219    
+dest_cbsa15460   -7.471e+04  4.061e+05  -0.184  0.85406    
+dest_cbsa15540   -6.025e+04  3.424e+05  -0.176  0.86032    
+dest_cbsa15580   -8.011e+04  4.062e+05  -0.197  0.84365    
+dest_cbsa15980    2.561e+05  3.336e+05   0.768  0.44279    
+dest_cbsa16060    6.835e+04  4.064e+05   0.168  0.86643    
+dest_cbsa16220   -7.870e+04  4.062e+05  -0.194  0.84636    
+dest_cbsa16260   -1.516e+04  4.692e+05  -0.032  0.97423    
+dest_cbsa16300   -8.100e+03  3.464e+05  -0.023  0.98134    
+dest_cbsa16580   -1.585e+05  3.828e+05  -0.414  0.67890    
+dest_cbsa16620   -6.549e+04  3.546e+05  -0.185  0.85346    
+dest_cbsa16700    1.219e+05  3.341e+05   0.365  0.71518    
+dest_cbsa16740    4.226e+05  3.329e+05   1.270  0.20425    
+dest_cbsa16820   -8.942e+04  3.547e+05  -0.252  0.80098    
+dest_cbsa16860   -1.201e+05  3.545e+05  -0.339  0.73471    
+dest_cbsa16940   -2.128e+05  4.688e+05  -0.454  0.64980    
+dest_cbsa16980    5.542e+05  3.323e+05   1.668  0.09540 .  
+dest_cbsa17140    8.949e+04  3.346e+05   0.267  0.78913    
+dest_cbsa17220    7.374e+02  3.886e+05   0.002  0.99849    
+dest_cbsa17460    1.563e+05  3.339e+05   0.468  0.63963    
+dest_cbsa17780   -3.065e+04  3.830e+05  -0.080  0.93622    
+dest_cbsa17820    1.120e+05  3.340e+05   0.335  0.73741    
+dest_cbsa17860   -1.909e+05  4.059e+05  -0.470  0.63804    
+dest_cbsa17900   -3.794e+04  3.465e+05  -0.109  0.91282    
+dest_cbsa17980   -1.780e+05  3.829e+05  -0.465  0.64204    
+dest_cbsa18060   -2.428e+05  4.688e+05  -0.518  0.60448    
+dest_cbsa18140    1.700e+05  3.336e+05   0.510  0.61024    
+dest_cbsa18300   -1.494e+05  4.060e+05  -0.368  0.71288    
+dest_cbsa18580    6.543e+04  3.383e+05   0.193  0.84663    
+dest_cbsa18880    5.244e+04  3.357e+05   0.156  0.87589    
+dest_cbsa19100    5.710e+05  3.323e+05   1.718  0.08579 .  
+dest_cbsa19340   -1.322e+05  3.627e+05  -0.365  0.71545    
+dest_cbsa19430   -1.004e+05  3.496e+05  -0.287  0.77402    
+dest_cbsa19500    1.097e+05  3.993e+05   0.275  0.78354    
+dest_cbsa19620   -2.276e+05  4.685e+05  -0.486  0.62708    
+dest_cbsa19660   -2.460e+04  3.582e+05  -0.069  0.94524    
+dest_cbsa19740    5.190e+05  3.327e+05   1.560  0.11888    
+dest_cbsa19780    5.982e+04  3.354e+05   0.178  0.85844    
+dest_cbsa19820    3.166e+05  3.331e+05   0.950  0.34194    
+dest_cbsa19860   -1.560e+05  4.688e+05  -0.333  0.73933    
+dest_cbsa19980    3.145e+04  4.279e+05   0.074  0.94140    
+dest_cbsa20220   -2.298e+05  4.685e+05  -0.491  0.62378    
+dest_cbsa20260    2.530e+04  3.624e+05   0.070  0.94435    
+dest_cbsa20420   -1.188e+05  3.633e+05  -0.327  0.74367    
+dest_cbsa20740   -1.336e+05  4.049e+05  -0.330  0.74138    
+dest_cbsa20780   -1.797e+05  3.442e+05  -0.522  0.60158    
+dest_cbsa21220   -1.991e+04  4.692e+05  -0.042  0.96615    
+dest_cbsa21300    4.344e+04  4.690e+05   0.093  0.92622    
+dest_cbsa21340    1.536e+05  3.341e+05   0.460  0.64575    
+dest_cbsa21500   -1.062e+05  3.828e+05  -0.277  0.78156    
+dest_cbsa21540    1.009e+03  4.051e+05   0.002  0.99801    
+dest_cbsa21660    7.547e+04  3.368e+05   0.224  0.82272    
+dest_cbsa21700   -1.793e+05  3.582e+05  -0.501  0.61668    
+dest_cbsa21780   -1.318e+05  3.632e+05  -0.363  0.71671    
+dest_cbsa21820    2.651e+05  3.507e+05   0.756  0.44969    
+dest_cbsa22020   -5.424e+04  3.578e+05  -0.152  0.87950    
+dest_cbsa22180   -1.315e+05  3.829e+05  -0.343  0.73128    
+dest_cbsa22220   -8.195e+04  3.418e+05  -0.240  0.81049    
+dest_cbsa22380   -1.471e+05  3.828e+05  -0.384  0.70081    
+dest_cbsa22420    2.522e+04  3.846e+05   0.066  0.94771    
+dest_cbsa22500   -9.656e+04  4.689e+05  -0.206  0.83684    
+dest_cbsa22660   -2.215e+05  3.829e+05  -0.579  0.56287    
+dest_cbsa22700   -5.319e+04  3.922e+05  -0.136  0.89213    
+dest_cbsa22780   -6.207e+03  4.208e+05  -0.015  0.98823    
+dest_cbsa22900   -2.107e+05  4.685e+05  -0.450  0.65297    
+dest_cbsa23060   -7.717e+04  3.541e+05  -0.218  0.82751    
+dest_cbsa23420    9.178e+04  3.367e+05   0.273  0.78517    
+dest_cbsa23540   -1.825e+05  3.707e+05  -0.492  0.62253    
+dest_cbsa23780   -2.143e+05  4.685e+05  -0.457  0.64738    
+dest_cbsa23940   -1.775e+05  4.688e+05  -0.379  0.70496    
+dest_cbsa24060   -1.201e+05  3.478e+05  -0.345  0.72995    
+dest_cbsa24220    3.434e+04  4.671e+05   0.074  0.94139    
+dest_cbsa24260   -1.952e+05  4.685e+05  -0.417  0.67699    
+dest_cbsa24300   -2.403e+04  3.633e+05  -0.066  0.94726    
+dest_cbsa24340    6.215e+04  3.352e+05   0.185  0.85292    
+dest_cbsa24500   -8.788e+03  3.633e+05  -0.024  0.98070    
+dest_cbsa24580   -1.316e+04  3.450e+05  -0.038  0.96958    
+dest_cbsa24660   -1.031e+05  3.445e+05  -0.299  0.76482    
+dest_cbsa24780   -8.113e+04  4.689e+05  -0.173  0.86263    
+dest_cbsa25060   -7.172e+04  3.627e+05  -0.198  0.84328    
+dest_cbsa25200   -1.415e+05  3.582e+05  -0.395  0.69275    
+dest_cbsa25420   -1.207e+04  3.420e+05  -0.035  0.97185    
+dest_cbsa25540    1.659e+05  3.344e+05   0.496  0.61983    
+dest_cbsa25700   -2.259e+04  3.887e+05  -0.058  0.95364    
+dest_cbsa25740   -8.248e+04  3.830e+05  -0.215  0.82948    
+dest_cbsa25840   -2.928e+03  4.694e+05  -0.006  0.99502    
+dest_cbsa25900    2.323e+05  3.382e+05   0.687  0.49214    
+dest_cbsa25940   -1.733e+05  3.478e+05  -0.498  0.61829    
+dest_cbsa26020   -1.137e+05  4.060e+05  -0.280  0.77947    
+dest_cbsa26340   -2.058e+05  4.685e+05  -0.439  0.66051    
+dest_cbsa26420    4.151e+05  3.324e+05   1.249  0.21177    
+dest_cbsa26580   -8.322e+04  4.689e+05  -0.177  0.85913    
+dest_cbsa26620   -8.947e+04  3.442e+05  -0.260  0.79490    
+dest_cbsa26820   -3.722e+04  3.583e+05  -0.104  0.91726    
+dest_cbsa26900    1.659e+05  3.337e+05   0.497  0.61907    
+dest_cbsa27020    3.546e+02  4.051e+05   0.001  0.99930    
+dest_cbsa27060   -8.882e+04  3.582e+05  -0.248  0.80418    
+dest_cbsa27140    4.327e+04  3.358e+05   0.129  0.89747    
+dest_cbsa27220   -5.250e+04  3.406e+05  -0.154  0.87751    
+dest_cbsa27260    1.273e+05  3.345e+05   0.381  0.70343    
+dest_cbsa27340   -1.169e+05  4.061e+05  -0.288  0.77355    
+dest_cbsa27420   -1.580e+05  4.688e+05  -0.337  0.73609    
+dest_cbsa27780   -9.498e+02  3.886e+05  -0.002  0.99805    
+dest_cbsa27900   -1.429e+05  3.828e+05  -0.373  0.70884    
+dest_cbsa27940    1.711e+05  3.755e+05   0.456  0.64864    
+dest_cbsa27980    3.153e+05  3.385e+05   0.931  0.35167    
+dest_cbsa28020   -1.011e+05  4.060e+05  -0.249  0.80336    
+dest_cbsa28060   -1.158e+04  3.431e+05  -0.034  0.97308    
+dest_cbsa28140    1.764e+05  3.334e+05   0.529  0.59683    
+dest_cbsa28180    1.878e+05  3.443e+05   0.545  0.58549    
+dest_cbsa28260   -1.878e+05  4.060e+05  -0.463  0.64356    
+dest_cbsa28420   -6.405e+04  3.578e+05  -0.179  0.85793    
+dest_cbsa28540    1.280e+05  3.755e+05   0.341  0.73320    
+dest_cbsa28580   -1.223e+05  3.419e+05  -0.358  0.72047    
+dest_cbsa28660   -1.405e+05  4.059e+05  -0.346  0.72923    
+dest_cbsa28700   -1.458e+05  3.829e+05  -0.381  0.70330    
+dest_cbsa28860    9.625e+04  4.693e+05   0.205  0.83751    
+dest_cbsa28940   -6.640e+04  3.423e+05  -0.194  0.84622    
+dest_cbsa29100   -6.636e+04  3.821e+05  -0.174  0.86212    
+dest_cbsa29180   -1.129e+05  3.707e+05  -0.305  0.76065    
+dest_cbsa29340   -1.565e+05  4.059e+05  -0.386  0.69976    
+dest_cbsa29620   -8.181e+04  3.828e+05  -0.214  0.83078    
+dest_cbsa29660   -2.092e+05  4.688e+05  -0.446  0.65548    
+dest_cbsa29700   -1.273e+05  4.059e+05  -0.314  0.75384    
+dest_cbsa29820    5.164e+05  3.331e+05   1.550  0.12114    
+dest_cbsa29860    6.916e+04  4.278e+05   0.162  0.87157    
+dest_cbsa30020   -2.320e+05  4.685e+05  -0.495  0.62049    
+dest_cbsa30100   -1.184e+05  4.693e+05  -0.252  0.80087    
+dest_cbsa30300   -5.022e+04  4.062e+05  -0.124  0.90160    
+dest_cbsa30460   -4.818e+04  3.476e+05  -0.139  0.88974    
+dest_cbsa30580    3.074e+04  4.279e+05   0.072  0.94274    
+dest_cbsa30700    1.323e+04  3.542e+05   0.037  0.97021    
+dest_cbsa30780    7.802e+04  3.351e+05   0.233  0.81592    
+dest_cbsa30980   -2.510e+05  4.685e+05  -0.536  0.59207    
+dest_cbsa31080    6.789e+05  3.322e+05   2.043  0.04104 *  
+dest_cbsa31140    1.059e+05  3.341e+05   0.317  0.75141    
+dest_cbsa31180    5.081e+04  3.354e+05   0.152  0.87957    
+dest_cbsa31340   -4.441e+04  4.689e+05  -0.095  0.92455    
+dest_cbsa31540   -2.108e+04  3.377e+05  -0.062  0.95021    
+dest_cbsa31660   -3.433e+05  4.061e+05  -0.845  0.39798    
+dest_cbsa31700    9.437e+04  3.355e+05   0.281  0.77853    
+dest_cbsa31740   -1.879e+05  4.059e+05  -0.463  0.64336    
+dest_cbsa31860   -5.085e+04  4.671e+05  -0.109  0.91332    
+dest_cbsa32100   -6.544e+04  3.821e+05  -0.171  0.86402    
+dest_cbsa32380    5.841e+04  4.191e+05   0.139  0.88915    
+dest_cbsa32420   -2.805e+04  4.701e+05  -0.060  0.95243    
+dest_cbsa32580   -4.809e+04  3.828e+05  -0.126  0.90002    
+dest_cbsa32780   -4.613e+04  3.480e+05  -0.133  0.89454    
+dest_cbsa32820    8.533e+04  3.344e+05   0.255  0.79856    
+dest_cbsa32940    7.722e+04  4.278e+05   0.181  0.85676    
+dest_cbsa33100    7.488e+05  3.324e+05   2.253  0.02430 *  
+dest_cbsa33260    7.531e+04  3.349e+05   0.225  0.82210    
+dest_cbsa33340    1.080e+05  3.340e+05   0.323  0.74643    
+dest_cbsa33460    3.351e+05  3.330e+05   1.006  0.31423    
+dest_cbsa33500   -3.269e+04  4.050e+05  -0.081  0.93567    
+dest_cbsa33540   -3.079e+04  3.450e+05  -0.089  0.92889    
+dest_cbsa33660   -1.029e+05  3.707e+05  -0.277  0.78143    
+dest_cbsa33740   -1.768e+05  3.828e+05  -0.462  0.64420    
+dest_cbsa33860   -8.625e+04  3.633e+05  -0.237  0.81232    
+dest_cbsa33940   -3.868e+04  3.383e+05  -0.114  0.90897    
+dest_cbsa34740   -2.422e+05  4.685e+05  -0.517  0.60523    
+dest_cbsa34820    1.040e+05  3.344e+05   0.311  0.75581    
+dest_cbsa34980    2.608e+05  3.334e+05   0.782  0.43403    
+dest_cbsa35100   -6.045e+04  4.060e+05  -0.149  0.88165    
+dest_cbsa35300    1.034e+05  3.434e+05   0.301  0.76335    
+dest_cbsa35380    2.181e+05  3.334e+05   0.654  0.51305    
+dest_cbsa35620    8.959e+05  3.322e+05   2.697  0.00702 ** 
+dest_cbsa35820    3.719e+04  4.279e+05   0.087  0.93074    
+dest_cbsa35840    1.336e+05  3.344e+05   0.400  0.68953    
+dest_cbsa36260   -3.026e+05  4.684e+05  -0.646  0.51831    
+dest_cbsa36300    1.124e+04  3.886e+05   0.029  0.97693    
+dest_cbsa36420    1.010e+05  3.341e+05   0.302  0.76241    
+dest_cbsa36540    9.982e+04  3.340e+05   0.299  0.76509    
+dest_cbsa36740    5.039e+05  3.330e+05   1.513  0.13030    
+dest_cbsa36980    6.996e+04  4.064e+05   0.172  0.86331    
+dest_cbsa37120   -2.499e+05  4.688e+05  -0.533  0.59409    
+dest_cbsa37140    9.460e+03  4.166e+05   0.023  0.98188    
+dest_cbsa37340   -8.132e+04  3.707e+05  -0.219  0.82638    
+dest_cbsa37460    1.138e+05  3.351e+05   0.340  0.73422    
+dest_cbsa37860    9.107e+04  3.353e+05   0.272  0.78592    
+dest_cbsa37900   -1.320e+05  3.828e+05  -0.345  0.73025    
+dest_cbsa37980    3.290e+05  3.332e+05   0.988  0.32336    
+dest_cbsa38060    4.709e+05  3.329e+05   1.414  0.15727    
+dest_cbsa38180   -1.878e+05  4.688e+05  -0.401  0.68874    
+dest_cbsa38300    1.478e+05  3.339e+05   0.443  0.65795    
+dest_cbsa38460    2.089e+04  3.886e+05   0.054  0.95714    
+dest_cbsa38540   -2.544e+04  4.692e+05  -0.054  0.95676    
+dest_cbsa38660   -1.985e+05  4.061e+05  -0.489  0.62504    
+dest_cbsa38860    5.992e+04  3.356e+05   0.179  0.85829    
+dest_cbsa38900    3.040e+05  3.336e+05   0.911  0.36215    
+dest_cbsa39100   -1.130e+05  3.583e+05  -0.315  0.75247    
+dest_cbsa39150   -2.527e+05  4.059e+05  -0.623  0.53354    
+dest_cbsa39300    1.387e+05  3.347e+05   0.414  0.67858    
+dest_cbsa39380   -2.164e+05  4.688e+05  -0.462  0.64440    
+dest_cbsa39420    2.921e+04  4.066e+05   0.072  0.94274    
+dest_cbsa39460    1.268e+05  4.671e+05   0.271  0.78609    
+dest_cbsa39500   -7.555e+04  4.061e+05  -0.186  0.85243    
+dest_cbsa39580    2.092e+05  3.337e+05   0.627  0.53079    
+dest_cbsa39660   -1.035e+05  3.462e+05  -0.299  0.76502    
+dest_cbsa39820   -2.209e+05  3.633e+05  -0.608  0.54308    
+dest_cbsa39900    1.747e+05  3.339e+05   0.523  0.60085    
+dest_cbsa40060    4.795e+04  3.355e+05   0.143  0.88635    
+dest_cbsa40140    2.393e+05  3.330e+05   0.719  0.47244    
+dest_cbsa40180   -1.889e+05  4.688e+05  -0.403  0.68693    
+dest_cbsa40220   -8.983e+04  3.547e+05  -0.253  0.80008    
+dest_cbsa40340   -6.627e+04  3.578e+05  -0.185  0.85306    
+dest_cbsa40380    5.928e+04  3.354e+05   0.177  0.85973    
+dest_cbsa40540   -1.923e+05  4.688e+05  -0.410  0.68168    
+dest_cbsa40740   -1.639e+05  4.060e+05  -0.404  0.68643    
+dest_cbsa40860   -1.164e+05  4.693e+05  -0.248  0.80415    
+dest_cbsa40900    2.932e+05  3.337e+05   0.879  0.37959    
+dest_cbsa40980   -9.811e+04  4.060e+05  -0.242  0.80907    
+dest_cbsa41100   -1.028e+05  3.707e+05  -0.277  0.78149    
+dest_cbsa41180    2.139e+05  3.333e+05   0.642  0.52116    
+dest_cbsa41460   -1.978e+04  3.887e+05  -0.051  0.95941    
+dest_cbsa41500   -1.295e+05  3.545e+05  -0.365  0.71481    
+dest_cbsa41540   -3.938e+04  4.062e+05  -0.097  0.92276    
+dest_cbsa41620    3.455e+05  3.333e+05   1.037  0.29984    
+dest_cbsa41660   -2.109e+05  4.685e+05  -0.450  0.65261    
+dest_cbsa41700    2.009e+05  3.335e+05   0.602  0.54692    
+dest_cbsa41740    3.601e+05  3.333e+05   1.080  0.27997    
+dest_cbsa41860    5.290e+05  3.326e+05   1.590  0.11180    
+dest_cbsa41940    2.874e+05  3.337e+05   0.861  0.38910    
+dest_cbsa41980    3.152e+05  3.348e+05   0.942  0.34645    
+dest_cbsa42020   -1.040e+05  3.518e+05  -0.296  0.76740    
+dest_cbsa42140   -1.503e+05  3.828e+05  -0.393  0.69455    
+dest_cbsa42200    1.173e+05  3.362e+05   0.349  0.72719    
+dest_cbsa42220   -1.261e+05  3.479e+05  -0.363  0.71692    
+dest_cbsa42300    7.950e+04  3.879e+05   0.205  0.83763    
+dest_cbsa42340    9.390e+04  3.345e+05   0.281  0.77896    
+dest_cbsa42420    2.708e+04  4.279e+05   0.063  0.94954    
+dest_cbsa42540   -1.931e+05  3.707e+05  -0.521  0.60249    
+dest_cbsa42660    4.990e+05  3.332e+05   1.498  0.13424    
+dest_cbsa43260   -1.745e+05  4.688e+05  -0.372  0.70967    
+dest_cbsa43340   -1.155e+05  3.632e+05  -0.318  0.75053    
+dest_cbsa43460    5.790e+04  3.812e+05   0.152  0.87928    
+dest_cbsa43580   -1.890e+05  4.060e+05  -0.466  0.64153    
+dest_cbsa43620   -5.237e+04  3.476e+05  -0.151  0.88024    
+dest_cbsa43780   -5.080e+04  3.425e+05  -0.148  0.88210    
+dest_cbsa43900    3.609e+04  3.354e+05   0.108  0.91433    
+dest_cbsa44060    1.504e+05  3.348e+05   0.449  0.65331    
+dest_cbsa44100   -2.083e+05  4.059e+05  -0.513  0.60781    
+dest_cbsa44180   -3.432e+04  3.549e+05  -0.097  0.92296    
+dest_cbsa44300   -7.903e+04  3.585e+05  -0.220  0.82553    
+dest_cbsa44420   -1.472e+05  4.059e+05  -0.363  0.71696    
+dest_cbsa44460   -5.122e+03  3.382e+05  -0.015  0.98792    
+dest_cbsa44660   -2.400e+05  4.685e+05  -0.512  0.60846    
+dest_cbsa45060    3.188e+04  3.360e+05   0.095  0.92442    
+dest_cbsa45220   -1.468e+05  3.545e+05  -0.414  0.67888    
+dest_cbsa45300    3.246e+05  3.332e+05   0.974  0.32998    
+dest_cbsa45500   -1.685e+05  4.059e+05  -0.415  0.67811    
+dest_cbsa45780   -1.512e+05  4.060e+05  -0.372  0.70959    
+dest_cbsa45900   -1.326e+05  3.431e+05  -0.386  0.69915    
+dest_cbsa45940   -6.708e+04  3.479e+05  -0.193  0.84710    
+dest_cbsa46060    1.177e+05  3.345e+05   0.352  0.72492    
+dest_cbsa46140    8.891e+04  3.344e+05   0.266  0.79033    
+dest_cbsa46300   -1.580e+05  3.632e+05  -0.435  0.66367    
+dest_cbsa46340   -2.389e+05  4.685e+05  -0.510  0.61006    
+dest_cbsa46520    4.187e+05  3.371e+05   1.242  0.21425    
+dest_cbsa46660   -2.481e+05  4.688e+05  -0.529  0.59675    
+dest_cbsa46860   -1.967e+05  4.688e+05  -0.420  0.67471    
+dest_cbsa47020   -1.107e+05  4.686e+05  -0.236  0.81324    
+dest_cbsa47240   -2.562e+05  3.518e+05  -0.728  0.46649    
+dest_cbsa47260    1.155e+05  3.344e+05   0.345  0.72981    
+dest_cbsa47380   -2.307e+05  4.685e+05  -0.492  0.62238    
+dest_cbsa47460   -1.522e+05  4.691e+05  -0.324  0.74558    
+dest_cbsa47900    3.979e+05  3.324e+05   1.197  0.23136    
+dest_cbsa47940   -2.241e+05  4.685e+05  -0.478  0.63240    
+dest_cbsa47980   -1.884e+05  4.060e+05  -0.464  0.64252    
+dest_cbsa48060    8.350e+03  4.691e+05   0.018  0.98580    
+dest_cbsa48140   -6.306e+04  3.821e+05  -0.165  0.86892    
+dest_cbsa48300   -1.654e+05  4.691e+05  -0.352  0.72449    
+dest_cbsa48620    2.908e+03  3.363e+05   0.009  0.99310    
+dest_cbsa48660   -2.538e+05  4.685e+05  -0.542  0.58796    
+dest_cbsa48900   -9.858e+04  3.442e+05  -0.286  0.77460    
+dest_cbsa49340   -3.533e+05  3.707e+05  -0.953  0.34067    
+dest_cbsa49420   -1.660e+05  4.691e+05  -0.354  0.72340    
+dest_cbsa49740   -1.282e+05  4.060e+05  -0.316  0.75214    
+distancemiles    -1.244e+02  6.131e+00 -20.295  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 330300 on 8624 degrees of freedom
+  (192 observations deleted due to missingness)
+Multiple R-squared:  0.4409,    Adjusted R-squared:  0.3998 
+F-statistic: 10.71 on 635 and 8624 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>rdu_cbsa_code <span class="ot">=</span> <span class="st">"39580"</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>rdu_pop <span class="ot">=</span> <span class="dv">2368947</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>new_routes <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">origin_cbsa =</span> rdu_cbsa_code,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dest_cbsa =</span> <span class="fu">c</span>(<span class="st">"42660"</span>, <span class="st">"21340"</span>, <span class="st">"45220"</span>, <span class="st">"40900"</span>),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">distancemiles =</span> <span class="fu">c</span>(<span class="dv">2363</span>, <span class="dv">1606</span>, <span class="dv">496</span>, <span class="dv">2345</span>),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">origin_cbsa_pop =</span> rdu_pop,  </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dest_cbsa_pop =</span> <span class="fu">c</span>(<span class="dv">630498</span>, <span class="dv">884432</span>, <span class="dv">202221</span>, <span class="dv">526384</span>)  </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>reversed_routes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">origin_cbsa =</span> new_routes<span class="sc">$</span>dest_cbsa,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dest_cbsa =</span> new_routes<span class="sc">$</span>origin_cbsa,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">distancemiles =</span> new_routes<span class="sc">$</span>distancemiles,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">origin_cbsa_pop =</span> new_routes<span class="sc">$</span>dest_cbsa_pop,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dest_cbsa_pop =</span> new_routes<span class="sc">$</span>origin_cbsa_pop</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>new_routes_bidirectional <span class="ot">=</span> <span class="fu">rbind</span>(new_routes, reversed_routes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(new_routes_bidirectional)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  origin_cbsa dest_cbsa distancemiles origin_cbsa_pop dest_cbsa_pop
+1       39580     42660          2363         2368947        630498
+2       39580     21340          1606         2368947        884432
+3       39580     45220           496         2368947        202221
+4       39580     40900          2345         2368947        526384
+5       42660     39580          2363          630498       2368947
+6       21340     39580          1606          884432       2368947
+7       45220     39580           496          202221       2368947
+8       40900     39580          2345          526384       2368947</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>new_routes_bidirectional<span class="sc">$</span>predicted_passengers <span class="ot">=</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> new_routes_bidirectional)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>demand_table <span class="ot">&lt;-</span> new_routes_bidirectional[</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">order</span>(<span class="sc">-</span>new_routes_bidirectional<span class="sc">$</span>predicted_passengers), </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"origin_cbsa"</span>, <span class="st">"dest_cbsa"</span>, <span class="st">"distancemiles"</span>, <span class="st">"predicted_passengers"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>] </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(demand_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  origin_cbsa dest_cbsa distancemiles predicted_passengers
+1       39580     42660          2363            137511.92
+5       42660     39580          2363            131612.06
+4       39580     40900          2345            -66071.78
+8       40900     39580          2345            -70383.93
+2       39580     21340          1606           -113743.86
+6       21340     39580          1606           -125520.26
+3       39580     45220           496           -275972.25
+7       45220     39580           496           -281867.44</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">=</span> <span class="fu">summary</span>(model)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = total_passengers ~ origin_cbsa + dest_cbsa + distancemiles, 
+    data = air_traffic_cbsa)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1507415  -116521   -13537    97350  4013408 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      -2.775e+05  4.690e+05  -0.592  0.55408    
+origin_cbsa10180 -1.528e+05  4.058e+05  -0.377  0.70647    
+origin_cbsa10380 -1.358e+05  3.632e+05  -0.374  0.70849    
+origin_cbsa10420  5.302e+02  3.495e+05   0.002  0.99879    
+origin_cbsa10500 -2.609e+05  4.688e+05  -0.557  0.57783    
+origin_cbsa10580  9.831e+04  3.347e+05   0.294  0.76899    
+origin_cbsa10740  1.524e+05  3.338e+05   0.456  0.64806    
+origin_cbsa10780 -1.454e+05  3.706e+05  -0.392  0.69480    
+origin_cbsa10900 -1.675e+05  3.581e+05  -0.468  0.63996    
+origin_cbsa10980  6.999e+04  3.879e+05   0.180  0.85682    
+origin_cbsa11100  2.022e+04  3.360e+05   0.060  0.95201    
+origin_cbsa11260  2.137e+05  3.401e+05   0.628  0.52977    
+origin_cbsa11540 -1.136e+04  3.543e+05  -0.032  0.97443    
+origin_cbsa11700 -1.399e+05  3.439e+05  -0.407  0.68420    
+origin_cbsa12060  5.877e+05  3.327e+05   1.767  0.07733 .  
+origin_cbsa12100 -2.705e+04  3.464e+05  -0.078  0.93775    
+origin_cbsa12260 -1.451e+05  3.477e+05  -0.417  0.67642    
+origin_cbsa12300 -1.209e+05  4.692e+05  -0.258  0.79662    
+origin_cbsa12420  2.861e+05  3.332e+05   0.858  0.39066    
+origin_cbsa12540 -1.244e+05  3.706e+05  -0.336  0.73706    
+origin_cbsa12580  2.836e+05  3.332e+05   0.851  0.39472    
+origin_cbsa12620 -1.645e+05  3.478e+05  -0.473  0.63626    
+origin_cbsa12700 -2.832e+05  3.832e+05  -0.739  0.45990    
+origin_cbsa12940 -7.436e+04  3.631e+05  -0.205  0.83776    
+origin_cbsa13140 -2.367e+05  4.684e+05  -0.505  0.61329    
+origin_cbsa13380  1.382e+03  3.402e+05   0.004  0.99676    
+origin_cbsa13420  1.014e+05  4.266e+05   0.238  0.81213    
+origin_cbsa13460 -1.703e+04  3.451e+05  -0.049  0.96065    
+origin_cbsa13740 -4.176e+04  3.514e+05  -0.119  0.90539    
+origin_cbsa13780  1.918e+04  4.690e+05   0.041  0.96738    
+origin_cbsa13820  1.045e+05  3.346e+05   0.312  0.75477    
+origin_cbsa13900 -6.374e+04  3.701e+05  -0.172  0.86325    
+origin_cbsa14010 -1.022e+05  3.517e+05  -0.291  0.77138    
+origin_cbsa14260  1.266e+05  3.349e+05   0.378  0.70541    
+origin_cbsa14460  4.100e+05  3.333e+05   1.230  0.21866    
+origin_cbsa14580  6.940e+04  3.346e+05   0.207  0.83568    
+origin_cbsa14660 -2.123e+04  4.671e+05  -0.045  0.96374    
+origin_cbsa14700 -1.526e+05  4.687e+05  -0.325  0.74483    
+origin_cbsa15180  9.299e+04  3.348e+05   0.278  0.78120    
+origin_cbsa15260 -2.481e+05  4.688e+05  -0.529  0.59656    
+origin_cbsa15380  1.091e+05  3.340e+05   0.327  0.74402    
+origin_cbsa15460 -8.543e+04  4.060e+05  -0.210  0.83334    
+origin_cbsa15540 -1.765e+04  3.411e+05  -0.052  0.95874    
+origin_cbsa15580 -8.742e+04  4.061e+05  -0.215  0.82957    
+origin_cbsa15980  2.441e+05  3.336e+05   0.732  0.46448    
+origin_cbsa16060  5.780e+04  4.063e+05   0.142  0.88686    
+origin_cbsa16220 -8.601e+04  4.061e+05  -0.212  0.83227    
+origin_cbsa16260 -2.593e+04  4.691e+05  -0.055  0.95592    
+origin_cbsa16300  2.297e+04  3.451e+05   0.067  0.94693    
+origin_cbsa16580 -1.639e+05  3.827e+05  -0.428  0.66842    
+origin_cbsa16620 -1.099e+04  3.520e+05  -0.031  0.97510    
+origin_cbsa16700  1.308e+05  3.342e+05   0.391  0.69545    
+origin_cbsa16740  4.176e+05  3.328e+05   1.255  0.20957    
+origin_cbsa16820 -9.393e+04  3.546e+05  -0.265  0.79111    
+origin_cbsa16860 -1.256e+05  3.544e+05  -0.354  0.72315    
+origin_cbsa16940 -2.169e+05  4.687e+05  -0.463  0.64350    
+origin_cbsa16980  5.461e+05  3.322e+05   1.644  0.10026    
+origin_cbsa17140  9.098e+04  3.344e+05   0.272  0.78558    
+origin_cbsa17220 -7.296e+03  3.886e+05  -0.019  0.98502    
+origin_cbsa17460  1.251e+05  3.341e+05   0.374  0.70814    
+origin_cbsa17780 -2.764e+04  3.829e+05  -0.072  0.94245    
+origin_cbsa17820  1.012e+05  3.340e+05   0.303  0.76181    
+origin_cbsa17860 -1.968e+05  4.058e+05  -0.485  0.62777    
+origin_cbsa17900 -8.855e+04  3.478e+05  -0.255  0.79906    
+origin_cbsa17980 -1.803e+05  3.828e+05  -0.471  0.63755    
+origin_cbsa18060 -2.450e+05  4.688e+05  -0.523  0.60129    
+origin_cbsa18140  1.559e+05  3.335e+05   0.467  0.64018    
+origin_cbsa18300 -1.476e+05  4.059e+05  -0.364  0.71608    
+origin_cbsa18580 -7.706e+03  3.373e+05  -0.023  0.98177    
+origin_cbsa18880  9.165e+04  3.353e+05   0.273  0.78457    
+origin_cbsa19100  5.694e+05  3.322e+05   1.714  0.08658 .  
+origin_cbsa19340 -1.359e+05  3.627e+05  -0.375  0.70780    
+origin_cbsa19430 -1.056e+05  3.495e+05  -0.302  0.76247    
+origin_cbsa19500  1.015e+05  3.992e+05   0.254  0.79925    
+origin_cbsa19620 -2.265e+05  4.684e+05  -0.484  0.62874    
+origin_cbsa19660 -2.845e+04  3.581e+05  -0.079  0.93667    
+origin_cbsa19740  5.155e+05  3.326e+05   1.550  0.12127    
+origin_cbsa19780  2.887e+04  3.362e+05   0.086  0.93158    
+origin_cbsa19820  3.135e+05  3.330e+05   0.941  0.34660    
+origin_cbsa19860 -1.599e+05  4.687e+05  -0.341  0.73305    
+origin_cbsa19980  2.807e+04  4.278e+05   0.066  0.94769    
+origin_cbsa20220 -2.385e+05  4.684e+05  -0.509  0.61069    
+origin_cbsa20260  2.201e+04  3.624e+05   0.061  0.95156    
+origin_cbsa20420 -1.211e+05  3.632e+05  -0.333  0.73885    
+origin_cbsa20740 -1.377e+05  4.049e+05  -0.340  0.73377    
+origin_cbsa20780 -1.833e+05  3.441e+05  -0.533  0.59432    
+origin_cbsa21220 -3.164e+04  4.691e+05  -0.067  0.94623    
+origin_cbsa21300  4.027e+04  4.690e+05   0.086  0.93156    
+origin_cbsa21340  1.426e+05  3.341e+05   0.427  0.66942    
+origin_cbsa21500 -1.128e+05  3.827e+05  -0.295  0.76815    
+origin_cbsa21540  4.874e+01  4.051e+05   0.000  0.99990    
+origin_cbsa21660  7.189e+04  3.363e+05   0.214  0.83074    
+origin_cbsa21700 -1.817e+05  3.581e+05  -0.507  0.61194    
+origin_cbsa21780 -1.362e+05  3.631e+05  -0.375  0.70755    
+origin_cbsa21820  1.890e+05  3.562e+05   0.531  0.59574    
+origin_cbsa22020 -5.592e+04  3.577e+05  -0.156  0.87577    
+origin_cbsa22180 -1.339e+05  3.828e+05  -0.350  0.72640    
+origin_cbsa22220 -8.858e+04  3.417e+05  -0.259  0.79543    
+origin_cbsa22380 -1.487e+05  3.828e+05  -0.389  0.69764    
+origin_cbsa22420 -1.112e+05  4.059e+05  -0.274  0.78407    
+origin_cbsa22500 -1.019e+05  4.688e+05  -0.217  0.82794    
+origin_cbsa22660 -2.263e+05  3.828e+05  -0.591  0.55447    
+origin_cbsa22700 -5.917e+04  3.921e+05  -0.151  0.88006    
+origin_cbsa22780 -1.436e+04  4.207e+05  -0.034  0.97277    
+origin_cbsa22900 -2.125e+05  4.684e+05  -0.454  0.65003    
+origin_cbsa23060 -8.078e+04  3.541e+05  -0.228  0.81955    
+origin_cbsa23420  1.032e+05  3.366e+05   0.307  0.75907    
+origin_cbsa23540 -1.862e+05  3.706e+05  -0.502  0.61547    
+origin_cbsa23780 -2.166e+05  4.684e+05  -0.462  0.64382    
+origin_cbsa23940 -1.807e+05  4.687e+05  -0.385  0.69991    
+origin_cbsa24060 -1.235e+05  3.477e+05  -0.355  0.72240    
+origin_cbsa24220  3.466e+04  4.671e+05   0.074  0.94085    
+origin_cbsa24260 -1.980e+05  4.684e+05  -0.423  0.67260    
+origin_cbsa24300 -9.927e+04  3.707e+05  -0.268  0.78884    
+origin_cbsa24340  6.345e+04  3.355e+05   0.189  0.84998    
+origin_cbsa24500 -5.958e+04  3.627e+05  -0.164  0.86954    
+origin_cbsa24580 -5.450e+04  3.430e+05  -0.159  0.87377    
+origin_cbsa24660 -1.458e+05  3.451e+05  -0.423  0.67263    
+origin_cbsa24780 -8.904e+04  4.688e+05  -0.190  0.84938    
+origin_cbsa25060 -7.337e+04  3.627e+05  -0.202  0.83969    
+origin_cbsa25200 -1.468e+05  3.581e+05  -0.410  0.68190    
+origin_cbsa25420 -7.277e+04  3.451e+05  -0.211  0.83300    
+origin_cbsa25540  1.447e+05  3.343e+05   0.433  0.66523    
+origin_cbsa25700 -2.837e+04  3.886e+05  -0.073  0.94181    
+origin_cbsa25740 -8.863e+04  3.829e+05  -0.231  0.81694    
+origin_cbsa25840 -3.616e+03  4.693e+05  -0.008  0.99385    
+origin_cbsa25900  2.483e+05  3.379e+05   0.735  0.46248    
+origin_cbsa25940 -1.337e+05  3.463e+05  -0.386  0.69947    
+origin_cbsa26020 -1.183e+05  4.059e+05  -0.291  0.77071    
+origin_cbsa26340 -2.138e+05  4.684e+05  -0.456  0.64814    
+origin_cbsa26420  4.095e+05  3.323e+05   1.232  0.21796    
+origin_cbsa26580 -8.898e+04  4.688e+05  -0.190  0.84948    
+origin_cbsa26620 -9.586e+04  3.441e+05  -0.279  0.78055    
+origin_cbsa26820 -4.725e+04  3.582e+05  -0.132  0.89503    
+origin_cbsa26900  1.496e+05  3.337e+05   0.448  0.65401    
+origin_cbsa27020 -8.612e+02  4.051e+05  -0.002  0.99830    
+origin_cbsa27060 -5.677e+04  3.587e+05  -0.158  0.87426    
+origin_cbsa27140  2.825e+04  3.354e+05   0.084  0.93289    
+origin_cbsa27220 -9.638e+04  3.410e+05  -0.283  0.77750    
+origin_cbsa27260  1.311e+05  3.341e+05   0.392  0.69479    
+origin_cbsa27340 -1.194e+05  4.060e+05  -0.294  0.76866    
+origin_cbsa27420 -1.621e+05  4.687e+05  -0.346  0.72953    
+origin_cbsa27780 -8.940e+03  3.886e+05  -0.023  0.98164    
+origin_cbsa27900 -1.488e+05  3.827e+05  -0.389  0.69743    
+origin_cbsa27940  1.335e+05  3.750e+05   0.356  0.72186    
+origin_cbsa27980  3.475e+05  3.372e+05   1.030  0.30286    
+origin_cbsa28020 -1.069e+05  4.059e+05  -0.263  0.79222    
+origin_cbsa28060 -5.020e+04  3.439e+05  -0.146  0.88396    
+origin_cbsa28140  1.728e+05  3.334e+05   0.518  0.60435    
+origin_cbsa28180  2.873e+05  3.401e+05   0.845  0.39827    
+origin_cbsa28260 -1.939e+05  4.059e+05  -0.478  0.63279    
+origin_cbsa28420 -6.785e+04  3.577e+05  -0.190  0.84958    
+origin_cbsa28540  9.069e+04  3.750e+05   0.242  0.80891    
+origin_cbsa28580 -1.259e+05  3.418e+05  -0.368  0.71262    
+origin_cbsa28660 -1.456e+05  4.058e+05  -0.359  0.71979    
+origin_cbsa28700 -1.494e+05  3.828e+05  -0.390  0.69627    
+origin_cbsa28860  8.286e+04  4.692e+05   0.177  0.85982    
+origin_cbsa28940 -7.681e+04  3.423e+05  -0.224  0.82244    
+origin_cbsa29100 -6.920e+04  3.820e+05  -0.181  0.85627    
+origin_cbsa29180 -1.162e+05  3.706e+05  -0.313  0.75395    
+origin_cbsa29340 -1.604e+05  4.058e+05  -0.395  0.69264    
+origin_cbsa29620 -8.827e+04  3.827e+05  -0.231  0.81762    
+origin_cbsa29660 -2.127e+05  4.687e+05  -0.454  0.64995    
+origin_cbsa29700 -1.290e+05  4.058e+05  -0.318  0.75063    
+origin_cbsa29820  5.164e+05  3.331e+05   1.550  0.12107    
+origin_cbsa29860  6.316e+04  4.277e+05   0.148  0.88260    
+origin_cbsa30020 -2.352e+05  4.684e+05  -0.502  0.61567    
+origin_cbsa30100 -1.255e+05  4.692e+05  -0.268  0.78906    
+origin_cbsa30300 -5.719e+04  4.061e+05  -0.141  0.88801    
+origin_cbsa30460 -5.303e+04  3.475e+05  -0.153  0.87871    
+origin_cbsa30580  2.737e+04  4.278e+05   0.064  0.94899    
+origin_cbsa30700  7.657e+04  3.499e+05   0.219  0.82679    
+origin_cbsa30780  5.571e+04  3.348e+05   0.166  0.86782    
+origin_cbsa30980 -2.522e+05  4.684e+05  -0.538  0.59028    
+origin_cbsa31080  6.673e+05  3.321e+05   2.009  0.04453 *  
+origin_cbsa31140  8.277e+04  3.344e+05   0.248  0.80449    
+origin_cbsa31180  8.604e+04  3.351e+05   0.257  0.79738    
+origin_cbsa31340 -5.017e+04  4.688e+05  -0.107  0.91478    
+origin_cbsa31540 -1.494e+04  3.374e+05  -0.044  0.96469    
+origin_cbsa31660 -1.131e+05  4.691e+05  -0.241  0.80956    
+origin_cbsa31700  1.261e+05  3.347e+05   0.377  0.70640    
+origin_cbsa31740 -1.933e+05  4.058e+05  -0.476  0.63390    
+origin_cbsa31860 -5.049e+04  4.671e+05  -0.108  0.91393    
+origin_cbsa32100 -6.900e+04  3.820e+05  -0.181  0.85667    
+origin_cbsa32380  5.110e+04  4.190e+05   0.122  0.90293    
+origin_cbsa32420 -2.796e+04  4.702e+05  -0.059  0.95259    
+origin_cbsa32580 -6.186e+04  3.827e+05  -0.162  0.87159    
+origin_cbsa32780 -4.925e+04  3.451e+05  -0.143  0.88654    
+origin_cbsa32820  9.228e+04  3.341e+05   0.276  0.78241    
+origin_cbsa32940  7.102e+04  4.277e+05   0.166  0.86813    
+origin_cbsa33100  7.394e+05  3.323e+05   2.225  0.02608 *  
+origin_cbsa33260  5.868e+04  3.348e+05   0.175  0.86087    
+origin_cbsa33340  1.322e+05  3.336e+05   0.396  0.69187    
+origin_cbsa33460  3.354e+05  3.330e+05   1.007  0.31376    
+origin_cbsa33500 -3.503e+04  4.050e+05  -0.086  0.93107    
+origin_cbsa33540 -5.410e+04  3.475e+05  -0.156  0.87629    
+origin_cbsa33660 -1.061e+05  3.706e+05  -0.286  0.77466    
+origin_cbsa33740 -1.787e+05  3.827e+05  -0.467  0.64049    
+origin_cbsa33860 -8.995e+04  3.632e+05  -0.248  0.80438    
+origin_cbsa33940 -5.933e+04  3.377e+05  -0.176  0.86054    
+origin_cbsa34740 -2.507e+05  4.684e+05  -0.535  0.59250    
+origin_cbsa34820  1.062e+05  3.343e+05   0.318  0.75073    
+origin_cbsa34980  2.531e+05  3.332e+05   0.759  0.44759    
+origin_cbsa35100 -6.735e+04  4.060e+05  -0.166  0.86825    
+origin_cbsa35300  9.910e+04  3.433e+05   0.289  0.77286    
+origin_cbsa35380  2.073e+05  3.334e+05   0.622  0.53411    
+origin_cbsa35620  8.904e+05  3.321e+05   2.681  0.00735 ** 
+origin_cbsa35820  3.373e+04  4.278e+05   0.079  0.93716    
+origin_cbsa35840  1.327e+05  3.342e+05   0.397  0.69131    
+origin_cbsa36260 -3.142e+05  4.683e+05  -0.671  0.50238    
+origin_cbsa36300  3.061e+03  3.886e+05   0.008  0.99371    
+origin_cbsa36420  1.338e+05  3.337e+05   0.401  0.68841    
+origin_cbsa36540  1.049e+05  3.337e+05   0.314  0.75326    
+origin_cbsa36740  5.047e+05  3.330e+05   1.516  0.12964    
+origin_cbsa36980  5.939e+04  4.063e+05   0.146  0.88378    
+origin_cbsa37120 -2.521e+05  4.688e+05  -0.538  0.59077    
+origin_cbsa37140  1.225e+03  4.165e+05   0.003  0.99765    
+origin_cbsa37340 -8.532e+04  3.706e+05  -0.230  0.81794    
+origin_cbsa37460  1.188e+05  3.345e+05   0.355  0.72250    
+origin_cbsa37860  7.563e+04  3.347e+05   0.226  0.82124    
+origin_cbsa37900 -1.375e+05  3.827e+05  -0.359  0.71946    
+origin_cbsa37980  3.272e+05  3.330e+05   0.983  0.32582    
+origin_cbsa38060  4.743e+05  3.329e+05   1.425  0.15424    
+origin_cbsa38180 -1.905e+05  4.687e+05  -0.407  0.68436    
+origin_cbsa38300  1.397e+05  3.338e+05   0.419  0.67554    
+origin_cbsa38460  1.260e+04  3.886e+05   0.032  0.97414    
+origin_cbsa38540 -3.646e+04  4.691e+05  -0.078  0.93805    
+origin_cbsa38660 -2.010e+05  4.060e+05  -0.495  0.62063    
+origin_cbsa38860  8.150e+04  3.350e+05   0.243  0.80779    
+origin_cbsa38900  3.033e+05  3.335e+05   0.910  0.36311    
+origin_cbsa39100 -1.161e+05  3.582e+05  -0.324  0.74589    
+origin_cbsa39150 -2.603e+05  4.059e+05  -0.641  0.52130    
+origin_cbsa39300  1.329e+05  3.345e+05   0.397  0.69116    
+origin_cbsa39380 -2.197e+05  4.687e+05  -0.469  0.63925    
+origin_cbsa39420  3.714e+03  4.064e+05   0.009  0.99271    
+origin_cbsa39460  1.272e+05  4.671e+05   0.272  0.78546    
+origin_cbsa39500 -8.626e+04  4.060e+05  -0.212  0.83176    
+origin_cbsa39580  2.100e+05  3.335e+05   0.630  0.52886    
+origin_cbsa39660 -5.283e+04  3.450e+05  -0.153  0.87831    
+origin_cbsa39820 -2.254e+05  3.632e+05  -0.621  0.53488    
+origin_cbsa39900  1.704e+05  3.341e+05   0.510  0.61013    
+origin_cbsa40060  6.256e+04  3.354e+05   0.187  0.85202    
+origin_cbsa40140  2.293e+05  3.330e+05   0.689  0.49103    
+origin_cbsa40180 -1.927e+05  4.687e+05  -0.411  0.68099    
+origin_cbsa40220 -9.448e+04  3.546e+05  -0.266  0.78992    
+origin_cbsa40340 -6.956e+04  3.577e+05  -0.194  0.84582    
+origin_cbsa40380  8.796e+03  3.356e+05   0.026  0.97909    
+origin_cbsa40540 -1.956e+05  4.687e+05  -0.417  0.67644    
+origin_cbsa40740 -1.628e+05  4.059e+05  -0.401  0.68844    
+origin_cbsa40860 -1.236e+05  4.692e+05  -0.263  0.79218    
+origin_cbsa40900  2.897e+05  3.336e+05   0.868  0.38523    
+origin_cbsa40980 -1.030e+05  4.059e+05  -0.254  0.79980    
+origin_cbsa41100 -1.060e+05  3.707e+05  -0.286  0.77495    
+origin_cbsa41180  2.005e+05  3.333e+05   0.602  0.54746    
+origin_cbsa41460 -2.562e+04  3.886e+05  -0.066  0.94743    
+origin_cbsa41500 -1.321e+05  3.544e+05  -0.373  0.70938    
+origin_cbsa41540 -4.457e+04  4.061e+05  -0.110  0.91260    
+origin_cbsa41620  3.350e+05  3.332e+05   1.005  0.31476    
+origin_cbsa41660 -1.543e+05  4.058e+05  -0.380  0.70382    
+origin_cbsa41700  1.881e+05  3.334e+05   0.564  0.57272    
+origin_cbsa41740  3.561e+05  3.333e+05   1.068  0.28545    
+origin_cbsa41860  5.365e+05  3.325e+05   1.613  0.10672    
+origin_cbsa41940  2.948e+05  3.336e+05   0.884  0.37696    
+origin_cbsa41980  3.152e+05  3.345e+05   0.942  0.34608    
+origin_cbsa42020 -1.059e+05  3.517e+05  -0.301  0.76325    
+origin_cbsa42140 -1.512e+05  3.828e+05  -0.395  0.69292    
+origin_cbsa42200  1.209e+05  3.355e+05   0.360  0.71856    
+origin_cbsa42220 -1.300e+05  3.478e+05  -0.374  0.70854    
+origin_cbsa42300  7.841e+04  3.879e+05   0.202  0.83983    
+origin_cbsa42340  8.825e+04  3.346e+05   0.264  0.79200    
+origin_cbsa42420  2.347e+04  4.278e+05   0.055  0.95626    
+origin_cbsa42540 -2.005e+05  3.706e+05  -0.541  0.58855    
+origin_cbsa42660  4.940e+05  3.331e+05   1.483  0.13814    
+origin_cbsa43260 -1.766e+05  4.687e+05  -0.377  0.70631    
+origin_cbsa43340 -1.187e+05  3.631e+05  -0.327  0.74375    
+origin_cbsa43460  4.985e+04  3.811e+05   0.131  0.89595    
+origin_cbsa43580 -1.946e+05  4.059e+05  -0.479  0.63160    
+origin_cbsa43620 -3.337e+04  3.475e+05  -0.096  0.92351    
+origin_cbsa43780 -5.051e+04  3.432e+05  -0.147  0.88300    
+origin_cbsa43900  2.004e+04  3.355e+05   0.060  0.95237    
+origin_cbsa44060  1.540e+05  3.346e+05   0.460  0.64540    
+origin_cbsa44100  8.858e+03  3.839e+05   0.023  0.98159    
+origin_cbsa44180 -1.060e+05  3.581e+05  -0.296  0.76726    
+origin_cbsa44300 -7.818e+04  3.584e+05  -0.218  0.82736    
+origin_cbsa44420 -1.551e+05  4.058e+05  -0.382  0.70242    
+origin_cbsa44460 -3.004e+04  3.376e+05  -0.089  0.92910    
+origin_cbsa44660 -2.422e+05  4.684e+05  -0.517  0.60515    
+origin_cbsa45060  6.617e+04  3.356e+05   0.197  0.84368    
+origin_cbsa45220 -1.518e+05  3.544e+05  -0.428  0.66839    
+origin_cbsa45300  3.249e+05  3.332e+05   0.975  0.32951    
+origin_cbsa45500 -1.720e+05  4.058e+05  -0.424  0.67180    
+origin_cbsa45780 -1.576e+05  4.059e+05  -0.388  0.69776    
+origin_cbsa45900 -6.165e+04  3.416e+05  -0.180  0.85681    
+origin_cbsa45940 -7.190e+04  3.478e+05  -0.207  0.83620    
+origin_cbsa46060  1.319e+05  3.345e+05   0.394  0.69340    
+origin_cbsa46140  1.013e+05  3.341e+05   0.303  0.76180    
+origin_cbsa46300 -1.733e+05  3.632e+05  -0.477  0.63332    
+origin_cbsa46340 -2.393e+05  4.684e+05  -0.511  0.60940    
+origin_cbsa46520  4.337e+05  3.362e+05   1.290  0.19707    
+origin_cbsa46660 -2.510e+05  4.688e+05  -0.535  0.59233    
+origin_cbsa46860 -2.005e+05  4.687e+05  -0.428  0.66881    
+origin_cbsa47020 -1.162e+05  4.685e+05  -0.248  0.80408    
+origin_cbsa47240 -2.612e+05  3.517e+05  -0.743  0.45759    
+origin_cbsa47260  7.964e+04  3.345e+05   0.238  0.81183    
+origin_cbsa47380 -2.324e+05  4.684e+05  -0.496  0.61980    
+origin_cbsa47460 -1.569e+05  4.690e+05  -0.335  0.73794    
+origin_cbsa47900  3.903e+05  3.323e+05   1.174  0.24023    
+origin_cbsa47940 -2.327e+05  4.684e+05  -0.497  0.61935    
+origin_cbsa47980 -1.943e+05  4.059e+05  -0.479  0.63221    
+origin_cbsa48060  5.553e+03  4.690e+05   0.012  0.99055    
+origin_cbsa48140 -6.670e+04  3.820e+05  -0.175  0.86141    
+origin_cbsa48300 -1.705e+05  4.690e+05  -0.363  0.71628    
+origin_cbsa48620  7.607e+03  3.362e+05   0.023  0.98195    
+origin_cbsa48660 -2.498e+05  4.684e+05  -0.533  0.59389    
+origin_cbsa48900 -1.041e+05  3.441e+05  -0.303  0.76224    
+origin_cbsa49340 -3.609e+05  3.707e+05  -0.974  0.33025    
+origin_cbsa49420 -1.707e+05  4.690e+05  -0.364  0.71595    
+origin_cbsa49740 -1.241e+05  4.059e+05  -0.306  0.75982    
+dest_cbsa10180   -2.048e+05  4.685e+05  -0.437  0.66207    
+dest_cbsa10380   -1.323e+05  3.633e+05  -0.364  0.71573    
+dest_cbsa10420    5.029e+03  3.496e+05   0.014  0.98852    
+dest_cbsa10500   -2.589e+05  4.688e+05  -0.552  0.58086    
+dest_cbsa10580    1.131e+05  3.346e+05   0.338  0.73523    
+dest_cbsa10740    1.469e+05  3.338e+05   0.440  0.65996    
+dest_cbsa10780   -1.437e+05  3.707e+05  -0.388  0.69836    
+dest_cbsa10900   -8.862e+04  3.550e+05  -0.250  0.80290    
+dest_cbsa10980    7.131e+04  3.879e+05   0.184  0.85416    
+dest_cbsa11100    3.153e+04  3.357e+05   0.094  0.92517    
+dest_cbsa11260    2.415e+05  3.394e+05   0.711  0.47687    
+dest_cbsa11540   -7.105e+04  3.578e+05  -0.199  0.84258    
+dest_cbsa11700   -1.348e+05  3.440e+05  -0.392  0.69521    
+dest_cbsa12060    5.902e+05  3.328e+05   1.773  0.07618 .  
+dest_cbsa12100   -2.489e+04  3.465e+05  -0.072  0.94273    
+dest_cbsa12260   -1.405e+05  3.478e+05  -0.404  0.68619    
+dest_cbsa12300   -1.136e+05  4.693e+05  -0.242  0.80880    
+dest_cbsa12420    2.893e+05  3.333e+05   0.868  0.38533    
+dest_cbsa12540   -1.256e+05  3.707e+05  -0.339  0.73475    
+dest_cbsa12580    2.985e+05  3.333e+05   0.896  0.37051    
+dest_cbsa12620   -1.592e+05  3.479e+05  -0.458  0.64729    
+dest_cbsa12700   -2.766e+05  3.833e+05  -0.722  0.47057    
+dest_cbsa12940   -2.271e+04  3.582e+05  -0.063  0.94945    
+dest_cbsa13140   -2.355e+05  4.685e+05  -0.503  0.61522    
+dest_cbsa13380    5.537e+03  3.426e+05   0.016  0.98710    
+dest_cbsa13420   -2.707e+03  4.671e+05  -0.006  0.99538    
+dest_cbsa13460   -5.427e+04  3.464e+05  -0.157  0.87551    
+dest_cbsa13740   -3.868e+04  3.514e+05  -0.110  0.91235    
+dest_cbsa13780    2.234e+04  4.690e+05   0.048  0.96201    
+dest_cbsa13820    8.777e+04  3.345e+05   0.262  0.79303    
+dest_cbsa13900   -6.290e+04  3.701e+05  -0.170  0.86506    
+dest_cbsa14010   -9.986e+04  3.517e+05  -0.284  0.77650    
+dest_cbsa14260    1.716e+05  3.343e+05   0.513  0.60783    
+dest_cbsa14460    4.173e+05  3.333e+05   1.252  0.21067    
+dest_cbsa14580    8.377e+04  3.346e+05   0.250  0.80229    
+dest_cbsa14660    8.242e+04  4.266e+05   0.193  0.84682    
+dest_cbsa14700   -1.488e+05  4.688e+05  -0.318  0.75086    
+dest_cbsa15180    7.462e+04  3.351e+05   0.223  0.82381    
+dest_cbsa15260   -2.452e+05  4.688e+05  -0.523  0.60096    
+dest_cbsa15380    1.100e+05  3.343e+05   0.329  0.74219    
+dest_cbsa15460   -7.471e+04  4.061e+05  -0.184  0.85406    
+dest_cbsa15540   -6.025e+04  3.424e+05  -0.176  0.86032    
+dest_cbsa15580   -8.011e+04  4.062e+05  -0.197  0.84365    
+dest_cbsa15980    2.561e+05  3.336e+05   0.768  0.44279    
+dest_cbsa16060    6.835e+04  4.064e+05   0.168  0.86643    
+dest_cbsa16220   -7.870e+04  4.062e+05  -0.194  0.84636    
+dest_cbsa16260   -1.516e+04  4.692e+05  -0.032  0.97423    
+dest_cbsa16300   -8.100e+03  3.464e+05  -0.023  0.98134    
+dest_cbsa16580   -1.585e+05  3.828e+05  -0.414  0.67890    
+dest_cbsa16620   -6.549e+04  3.546e+05  -0.185  0.85346    
+dest_cbsa16700    1.219e+05  3.341e+05   0.365  0.71518    
+dest_cbsa16740    4.226e+05  3.329e+05   1.270  0.20425    
+dest_cbsa16820   -8.942e+04  3.547e+05  -0.252  0.80098    
+dest_cbsa16860   -1.201e+05  3.545e+05  -0.339  0.73471    
+dest_cbsa16940   -2.128e+05  4.688e+05  -0.454  0.64980    
+dest_cbsa16980    5.542e+05  3.323e+05   1.668  0.09540 .  
+dest_cbsa17140    8.949e+04  3.346e+05   0.267  0.78913    
+dest_cbsa17220    7.374e+02  3.886e+05   0.002  0.99849    
+dest_cbsa17460    1.563e+05  3.339e+05   0.468  0.63963    
+dest_cbsa17780   -3.065e+04  3.830e+05  -0.080  0.93622    
+dest_cbsa17820    1.120e+05  3.340e+05   0.335  0.73741    
+dest_cbsa17860   -1.909e+05  4.059e+05  -0.470  0.63804    
+dest_cbsa17900   -3.794e+04  3.465e+05  -0.109  0.91282    
+dest_cbsa17980   -1.780e+05  3.829e+05  -0.465  0.64204    
+dest_cbsa18060   -2.428e+05  4.688e+05  -0.518  0.60448    
+dest_cbsa18140    1.700e+05  3.336e+05   0.510  0.61024    
+dest_cbsa18300   -1.494e+05  4.060e+05  -0.368  0.71288    
+dest_cbsa18580    6.543e+04  3.383e+05   0.193  0.84663    
+dest_cbsa18880    5.244e+04  3.357e+05   0.156  0.87589    
+dest_cbsa19100    5.710e+05  3.323e+05   1.718  0.08579 .  
+dest_cbsa19340   -1.322e+05  3.627e+05  -0.365  0.71545    
+dest_cbsa19430   -1.004e+05  3.496e+05  -0.287  0.77402    
+dest_cbsa19500    1.097e+05  3.993e+05   0.275  0.78354    
+dest_cbsa19620   -2.276e+05  4.685e+05  -0.486  0.62708    
+dest_cbsa19660   -2.460e+04  3.582e+05  -0.069  0.94524    
+dest_cbsa19740    5.190e+05  3.327e+05   1.560  0.11888    
+dest_cbsa19780    5.982e+04  3.354e+05   0.178  0.85844    
+dest_cbsa19820    3.166e+05  3.331e+05   0.950  0.34194    
+dest_cbsa19860   -1.560e+05  4.688e+05  -0.333  0.73933    
+dest_cbsa19980    3.145e+04  4.279e+05   0.074  0.94140    
+dest_cbsa20220   -2.298e+05  4.685e+05  -0.491  0.62378    
+dest_cbsa20260    2.530e+04  3.624e+05   0.070  0.94435    
+dest_cbsa20420   -1.188e+05  3.633e+05  -0.327  0.74367    
+dest_cbsa20740   -1.336e+05  4.049e+05  -0.330  0.74138    
+dest_cbsa20780   -1.797e+05  3.442e+05  -0.522  0.60158    
+dest_cbsa21220   -1.991e+04  4.692e+05  -0.042  0.96615    
+dest_cbsa21300    4.344e+04  4.690e+05   0.093  0.92622    
+dest_cbsa21340    1.536e+05  3.341e+05   0.460  0.64575    
+dest_cbsa21500   -1.062e+05  3.828e+05  -0.277  0.78156    
+dest_cbsa21540    1.009e+03  4.051e+05   0.002  0.99801    
+dest_cbsa21660    7.547e+04  3.368e+05   0.224  0.82272    
+dest_cbsa21700   -1.793e+05  3.582e+05  -0.501  0.61668    
+dest_cbsa21780   -1.318e+05  3.632e+05  -0.363  0.71671    
+dest_cbsa21820    2.651e+05  3.507e+05   0.756  0.44969    
+dest_cbsa22020   -5.424e+04  3.578e+05  -0.152  0.87950    
+dest_cbsa22180   -1.315e+05  3.829e+05  -0.343  0.73128    
+dest_cbsa22220   -8.195e+04  3.418e+05  -0.240  0.81049    
+dest_cbsa22380   -1.471e+05  3.828e+05  -0.384  0.70081    
+dest_cbsa22420    2.522e+04  3.846e+05   0.066  0.94771    
+dest_cbsa22500   -9.656e+04  4.689e+05  -0.206  0.83684    
+dest_cbsa22660   -2.215e+05  3.829e+05  -0.579  0.56287    
+dest_cbsa22700   -5.319e+04  3.922e+05  -0.136  0.89213    
+dest_cbsa22780   -6.207e+03  4.208e+05  -0.015  0.98823    
+dest_cbsa22900   -2.107e+05  4.685e+05  -0.450  0.65297    
+dest_cbsa23060   -7.717e+04  3.541e+05  -0.218  0.82751    
+dest_cbsa23420    9.178e+04  3.367e+05   0.273  0.78517    
+dest_cbsa23540   -1.825e+05  3.707e+05  -0.492  0.62253    
+dest_cbsa23780   -2.143e+05  4.685e+05  -0.457  0.64738    
+dest_cbsa23940   -1.775e+05  4.688e+05  -0.379  0.70496    
+dest_cbsa24060   -1.201e+05  3.478e+05  -0.345  0.72995    
+dest_cbsa24220    3.434e+04  4.671e+05   0.074  0.94139    
+dest_cbsa24260   -1.952e+05  4.685e+05  -0.417  0.67699    
+dest_cbsa24300   -2.403e+04  3.633e+05  -0.066  0.94726    
+dest_cbsa24340    6.215e+04  3.352e+05   0.185  0.85292    
+dest_cbsa24500   -8.788e+03  3.633e+05  -0.024  0.98070    
+dest_cbsa24580   -1.316e+04  3.450e+05  -0.038  0.96958    
+dest_cbsa24660   -1.031e+05  3.445e+05  -0.299  0.76482    
+dest_cbsa24780   -8.113e+04  4.689e+05  -0.173  0.86263    
+dest_cbsa25060   -7.172e+04  3.627e+05  -0.198  0.84328    
+dest_cbsa25200   -1.415e+05  3.582e+05  -0.395  0.69275    
+dest_cbsa25420   -1.207e+04  3.420e+05  -0.035  0.97185    
+dest_cbsa25540    1.659e+05  3.344e+05   0.496  0.61983    
+dest_cbsa25700   -2.259e+04  3.887e+05  -0.058  0.95364    
+dest_cbsa25740   -8.248e+04  3.830e+05  -0.215  0.82948    
+dest_cbsa25840   -2.928e+03  4.694e+05  -0.006  0.99502    
+dest_cbsa25900    2.323e+05  3.382e+05   0.687  0.49214    
+dest_cbsa25940   -1.733e+05  3.478e+05  -0.498  0.61829    
+dest_cbsa26020   -1.137e+05  4.060e+05  -0.280  0.77947    
+dest_cbsa26340   -2.058e+05  4.685e+05  -0.439  0.66051    
+dest_cbsa26420    4.151e+05  3.324e+05   1.249  0.21177    
+dest_cbsa26580   -8.322e+04  4.689e+05  -0.177  0.85913    
+dest_cbsa26620   -8.947e+04  3.442e+05  -0.260  0.79490    
+dest_cbsa26820   -3.722e+04  3.583e+05  -0.104  0.91726    
+dest_cbsa26900    1.659e+05  3.337e+05   0.497  0.61907    
+dest_cbsa27020    3.546e+02  4.051e+05   0.001  0.99930    
+dest_cbsa27060   -8.882e+04  3.582e+05  -0.248  0.80418    
+dest_cbsa27140    4.327e+04  3.358e+05   0.129  0.89747    
+dest_cbsa27220   -5.250e+04  3.406e+05  -0.154  0.87751    
+dest_cbsa27260    1.273e+05  3.345e+05   0.381  0.70343    
+dest_cbsa27340   -1.169e+05  4.061e+05  -0.288  0.77355    
+dest_cbsa27420   -1.580e+05  4.688e+05  -0.337  0.73609    
+dest_cbsa27780   -9.498e+02  3.886e+05  -0.002  0.99805    
+dest_cbsa27900   -1.429e+05  3.828e+05  -0.373  0.70884    
+dest_cbsa27940    1.711e+05  3.755e+05   0.456  0.64864    
+dest_cbsa27980    3.153e+05  3.385e+05   0.931  0.35167    
+dest_cbsa28020   -1.011e+05  4.060e+05  -0.249  0.80336    
+dest_cbsa28060   -1.158e+04  3.431e+05  -0.034  0.97308    
+dest_cbsa28140    1.764e+05  3.334e+05   0.529  0.59683    
+dest_cbsa28180    1.878e+05  3.443e+05   0.545  0.58549    
+dest_cbsa28260   -1.878e+05  4.060e+05  -0.463  0.64356    
+dest_cbsa28420   -6.405e+04  3.578e+05  -0.179  0.85793    
+dest_cbsa28540    1.280e+05  3.755e+05   0.341  0.73320    
+dest_cbsa28580   -1.223e+05  3.419e+05  -0.358  0.72047    
+dest_cbsa28660   -1.405e+05  4.059e+05  -0.346  0.72923    
+dest_cbsa28700   -1.458e+05  3.829e+05  -0.381  0.70330    
+dest_cbsa28860    9.625e+04  4.693e+05   0.205  0.83751    
+dest_cbsa28940   -6.640e+04  3.423e+05  -0.194  0.84622    
+dest_cbsa29100   -6.636e+04  3.821e+05  -0.174  0.86212    
+dest_cbsa29180   -1.129e+05  3.707e+05  -0.305  0.76065    
+dest_cbsa29340   -1.565e+05  4.059e+05  -0.386  0.69976    
+dest_cbsa29620   -8.181e+04  3.828e+05  -0.214  0.83078    
+dest_cbsa29660   -2.092e+05  4.688e+05  -0.446  0.65548    
+dest_cbsa29700   -1.273e+05  4.059e+05  -0.314  0.75384    
+dest_cbsa29820    5.164e+05  3.331e+05   1.550  0.12114    
+dest_cbsa29860    6.916e+04  4.278e+05   0.162  0.87157    
+dest_cbsa30020   -2.320e+05  4.685e+05  -0.495  0.62049    
+dest_cbsa30100   -1.184e+05  4.693e+05  -0.252  0.80087    
+dest_cbsa30300   -5.022e+04  4.062e+05  -0.124  0.90160    
+dest_cbsa30460   -4.818e+04  3.476e+05  -0.139  0.88974    
+dest_cbsa30580    3.074e+04  4.279e+05   0.072  0.94274    
+dest_cbsa30700    1.323e+04  3.542e+05   0.037  0.97021    
+dest_cbsa30780    7.802e+04  3.351e+05   0.233  0.81592    
+dest_cbsa30980   -2.510e+05  4.685e+05  -0.536  0.59207    
+dest_cbsa31080    6.789e+05  3.322e+05   2.043  0.04104 *  
+dest_cbsa31140    1.059e+05  3.341e+05   0.317  0.75141    
+dest_cbsa31180    5.081e+04  3.354e+05   0.152  0.87957    
+dest_cbsa31340   -4.441e+04  4.689e+05  -0.095  0.92455    
+dest_cbsa31540   -2.108e+04  3.377e+05  -0.062  0.95021    
+dest_cbsa31660   -3.433e+05  4.061e+05  -0.845  0.39798    
+dest_cbsa31700    9.437e+04  3.355e+05   0.281  0.77853    
+dest_cbsa31740   -1.879e+05  4.059e+05  -0.463  0.64336    
+dest_cbsa31860   -5.085e+04  4.671e+05  -0.109  0.91332    
+dest_cbsa32100   -6.544e+04  3.821e+05  -0.171  0.86402    
+dest_cbsa32380    5.841e+04  4.191e+05   0.139  0.88915    
+dest_cbsa32420   -2.805e+04  4.701e+05  -0.060  0.95243    
+dest_cbsa32580   -4.809e+04  3.828e+05  -0.126  0.90002    
+dest_cbsa32780   -4.613e+04  3.480e+05  -0.133  0.89454    
+dest_cbsa32820    8.533e+04  3.344e+05   0.255  0.79856    
+dest_cbsa32940    7.722e+04  4.278e+05   0.181  0.85676    
+dest_cbsa33100    7.488e+05  3.324e+05   2.253  0.02430 *  
+dest_cbsa33260    7.531e+04  3.349e+05   0.225  0.82210    
+dest_cbsa33340    1.080e+05  3.340e+05   0.323  0.74643    
+dest_cbsa33460    3.351e+05  3.330e+05   1.006  0.31423    
+dest_cbsa33500   -3.269e+04  4.050e+05  -0.081  0.93567    
+dest_cbsa33540   -3.079e+04  3.450e+05  -0.089  0.92889    
+dest_cbsa33660   -1.029e+05  3.707e+05  -0.277  0.78143    
+dest_cbsa33740   -1.768e+05  3.828e+05  -0.462  0.64420    
+dest_cbsa33860   -8.625e+04  3.633e+05  -0.237  0.81232    
+dest_cbsa33940   -3.868e+04  3.383e+05  -0.114  0.90897    
+dest_cbsa34740   -2.422e+05  4.685e+05  -0.517  0.60523    
+dest_cbsa34820    1.040e+05  3.344e+05   0.311  0.75581    
+dest_cbsa34980    2.608e+05  3.334e+05   0.782  0.43403    
+dest_cbsa35100   -6.045e+04  4.060e+05  -0.149  0.88165    
+dest_cbsa35300    1.034e+05  3.434e+05   0.301  0.76335    
+dest_cbsa35380    2.181e+05  3.334e+05   0.654  0.51305    
+dest_cbsa35620    8.959e+05  3.322e+05   2.697  0.00702 ** 
+dest_cbsa35820    3.719e+04  4.279e+05   0.087  0.93074    
+dest_cbsa35840    1.336e+05  3.344e+05   0.400  0.68953    
+dest_cbsa36260   -3.026e+05  4.684e+05  -0.646  0.51831    
+dest_cbsa36300    1.124e+04  3.886e+05   0.029  0.97693    
+dest_cbsa36420    1.010e+05  3.341e+05   0.302  0.76241    
+dest_cbsa36540    9.982e+04  3.340e+05   0.299  0.76509    
+dest_cbsa36740    5.039e+05  3.330e+05   1.513  0.13030    
+dest_cbsa36980    6.996e+04  4.064e+05   0.172  0.86331    
+dest_cbsa37120   -2.499e+05  4.688e+05  -0.533  0.59409    
+dest_cbsa37140    9.460e+03  4.166e+05   0.023  0.98188    
+dest_cbsa37340   -8.132e+04  3.707e+05  -0.219  0.82638    
+dest_cbsa37460    1.138e+05  3.351e+05   0.340  0.73422    
+dest_cbsa37860    9.107e+04  3.353e+05   0.272  0.78592    
+dest_cbsa37900   -1.320e+05  3.828e+05  -0.345  0.73025    
+dest_cbsa37980    3.290e+05  3.332e+05   0.988  0.32336    
+dest_cbsa38060    4.709e+05  3.329e+05   1.414  0.15727    
+dest_cbsa38180   -1.878e+05  4.688e+05  -0.401  0.68874    
+dest_cbsa38300    1.478e+05  3.339e+05   0.443  0.65795    
+dest_cbsa38460    2.089e+04  3.886e+05   0.054  0.95714    
+dest_cbsa38540   -2.544e+04  4.692e+05  -0.054  0.95676    
+dest_cbsa38660   -1.985e+05  4.061e+05  -0.489  0.62504    
+dest_cbsa38860    5.992e+04  3.356e+05   0.179  0.85829    
+dest_cbsa38900    3.040e+05  3.336e+05   0.911  0.36215    
+dest_cbsa39100   -1.130e+05  3.583e+05  -0.315  0.75247    
+dest_cbsa39150   -2.527e+05  4.059e+05  -0.623  0.53354    
+dest_cbsa39300    1.387e+05  3.347e+05   0.414  0.67858    
+dest_cbsa39380   -2.164e+05  4.688e+05  -0.462  0.64440    
+dest_cbsa39420    2.921e+04  4.066e+05   0.072  0.94274    
+dest_cbsa39460    1.268e+05  4.671e+05   0.271  0.78609    
+dest_cbsa39500   -7.555e+04  4.061e+05  -0.186  0.85243    
+dest_cbsa39580    2.092e+05  3.337e+05   0.627  0.53079    
+dest_cbsa39660   -1.035e+05  3.462e+05  -0.299  0.76502    
+dest_cbsa39820   -2.209e+05  3.633e+05  -0.608  0.54308    
+dest_cbsa39900    1.747e+05  3.339e+05   0.523  0.60085    
+dest_cbsa40060    4.795e+04  3.355e+05   0.143  0.88635    
+dest_cbsa40140    2.393e+05  3.330e+05   0.719  0.47244    
+dest_cbsa40180   -1.889e+05  4.688e+05  -0.403  0.68693    
+dest_cbsa40220   -8.983e+04  3.547e+05  -0.253  0.80008    
+dest_cbsa40340   -6.627e+04  3.578e+05  -0.185  0.85306    
+dest_cbsa40380    5.928e+04  3.354e+05   0.177  0.85973    
+dest_cbsa40540   -1.923e+05  4.688e+05  -0.410  0.68168    
+dest_cbsa40740   -1.639e+05  4.060e+05  -0.404  0.68643    
+dest_cbsa40860   -1.164e+05  4.693e+05  -0.248  0.80415    
+dest_cbsa40900    2.932e+05  3.337e+05   0.879  0.37959    
+dest_cbsa40980   -9.811e+04  4.060e+05  -0.242  0.80907    
+dest_cbsa41100   -1.028e+05  3.707e+05  -0.277  0.78149    
+dest_cbsa41180    2.139e+05  3.333e+05   0.642  0.52116    
+dest_cbsa41460   -1.978e+04  3.887e+05  -0.051  0.95941    
+dest_cbsa41500   -1.295e+05  3.545e+05  -0.365  0.71481    
+dest_cbsa41540   -3.938e+04  4.062e+05  -0.097  0.92276    
+dest_cbsa41620    3.455e+05  3.333e+05   1.037  0.29984    
+dest_cbsa41660   -2.109e+05  4.685e+05  -0.450  0.65261    
+dest_cbsa41700    2.009e+05  3.335e+05   0.602  0.54692    
+dest_cbsa41740    3.601e+05  3.333e+05   1.080  0.27997    
+dest_cbsa41860    5.290e+05  3.326e+05   1.590  0.11180    
+dest_cbsa41940    2.874e+05  3.337e+05   0.861  0.38910    
+dest_cbsa41980    3.152e+05  3.348e+05   0.942  0.34645    
+dest_cbsa42020   -1.040e+05  3.518e+05  -0.296  0.76740    
+dest_cbsa42140   -1.503e+05  3.828e+05  -0.393  0.69455    
+dest_cbsa42200    1.173e+05  3.362e+05   0.349  0.72719    
+dest_cbsa42220   -1.261e+05  3.479e+05  -0.363  0.71692    
+dest_cbsa42300    7.950e+04  3.879e+05   0.205  0.83763    
+dest_cbsa42340    9.390e+04  3.345e+05   0.281  0.77896    
+dest_cbsa42420    2.708e+04  4.279e+05   0.063  0.94954    
+dest_cbsa42540   -1.931e+05  3.707e+05  -0.521  0.60249    
+dest_cbsa42660    4.990e+05  3.332e+05   1.498  0.13424    
+dest_cbsa43260   -1.745e+05  4.688e+05  -0.372  0.70967    
+dest_cbsa43340   -1.155e+05  3.632e+05  -0.318  0.75053    
+dest_cbsa43460    5.790e+04  3.812e+05   0.152  0.87928    
+dest_cbsa43580   -1.890e+05  4.060e+05  -0.466  0.64153    
+dest_cbsa43620   -5.237e+04  3.476e+05  -0.151  0.88024    
+dest_cbsa43780   -5.080e+04  3.425e+05  -0.148  0.88210    
+dest_cbsa43900    3.609e+04  3.354e+05   0.108  0.91433    
+dest_cbsa44060    1.504e+05  3.348e+05   0.449  0.65331    
+dest_cbsa44100   -2.083e+05  4.059e+05  -0.513  0.60781    
+dest_cbsa44180   -3.432e+04  3.549e+05  -0.097  0.92296    
+dest_cbsa44300   -7.903e+04  3.585e+05  -0.220  0.82553    
+dest_cbsa44420   -1.472e+05  4.059e+05  -0.363  0.71696    
+dest_cbsa44460   -5.122e+03  3.382e+05  -0.015  0.98792    
+dest_cbsa44660   -2.400e+05  4.685e+05  -0.512  0.60846    
+dest_cbsa45060    3.188e+04  3.360e+05   0.095  0.92442    
+dest_cbsa45220   -1.468e+05  3.545e+05  -0.414  0.67888    
+dest_cbsa45300    3.246e+05  3.332e+05   0.974  0.32998    
+dest_cbsa45500   -1.685e+05  4.059e+05  -0.415  0.67811    
+dest_cbsa45780   -1.512e+05  4.060e+05  -0.372  0.70959    
+dest_cbsa45900   -1.326e+05  3.431e+05  -0.386  0.69915    
+dest_cbsa45940   -6.708e+04  3.479e+05  -0.193  0.84710    
+dest_cbsa46060    1.177e+05  3.345e+05   0.352  0.72492    
+dest_cbsa46140    8.891e+04  3.344e+05   0.266  0.79033    
+dest_cbsa46300   -1.580e+05  3.632e+05  -0.435  0.66367    
+dest_cbsa46340   -2.389e+05  4.685e+05  -0.510  0.61006    
+dest_cbsa46520    4.187e+05  3.371e+05   1.242  0.21425    
+dest_cbsa46660   -2.481e+05  4.688e+05  -0.529  0.59675    
+dest_cbsa46860   -1.967e+05  4.688e+05  -0.420  0.67471    
+dest_cbsa47020   -1.107e+05  4.686e+05  -0.236  0.81324    
+dest_cbsa47240   -2.562e+05  3.518e+05  -0.728  0.46649    
+dest_cbsa47260    1.155e+05  3.344e+05   0.345  0.72981    
+dest_cbsa47380   -2.307e+05  4.685e+05  -0.492  0.62238    
+dest_cbsa47460   -1.522e+05  4.691e+05  -0.324  0.74558    
+dest_cbsa47900    3.979e+05  3.324e+05   1.197  0.23136    
+dest_cbsa47940   -2.241e+05  4.685e+05  -0.478  0.63240    
+dest_cbsa47980   -1.884e+05  4.060e+05  -0.464  0.64252    
+dest_cbsa48060    8.350e+03  4.691e+05   0.018  0.98580    
+dest_cbsa48140   -6.306e+04  3.821e+05  -0.165  0.86892    
+dest_cbsa48300   -1.654e+05  4.691e+05  -0.352  0.72449    
+dest_cbsa48620    2.908e+03  3.363e+05   0.009  0.99310    
+dest_cbsa48660   -2.538e+05  4.685e+05  -0.542  0.58796    
+dest_cbsa48900   -9.858e+04  3.442e+05  -0.286  0.77460    
+dest_cbsa49340   -3.533e+05  3.707e+05  -0.953  0.34067    
+dest_cbsa49420   -1.660e+05  4.691e+05  -0.354  0.72340    
+dest_cbsa49740   -1.282e+05  4.060e+05  -0.316  0.75214    
+distancemiles    -1.244e+02  6.131e+00 -20.295  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 330300 on 8624 degrees of freedom
+  (192 observations deleted due to missingness)
+Multiple R-squared:  0.4409,    Adjusted R-squared:  0.3998 
+F-statistic: 10.71 on 635 and 8624 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">=</span> model_summary<span class="sc">$</span>r.squared</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"R-squared:"</span>, r_squared))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "R-squared: 0.440919993627452"</code></pre>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
