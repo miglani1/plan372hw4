@@ -1,0 +1,171 @@
+title: "NamitMiglani HW4"
+author: "NamitMiglani"
+output: html_document
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+
+library(here)
+library(tibble)
+library(dplyr)
+```
+
+
+install.packages("dplyr")
+install.packages("here")
+
+
+
+install.packages("tibble")
+
+
+
+```{r}
+air_traffic = read_csv(here::here("airport_pairs.csv"))
+```
+
+```{r}
+rdu_routes = air_traffic |>
+  filter(origin == "RDU" | dest == "RDU") |>
+  group_by(dest) |>
+  summarize(total_passengers = sum(passengers, na.rm = TRUE)) |>
+  filter(total_passengers > 10000)
+print(rdu_routes)
+```
+
+```{r}
+cbsa_data = get_acs(geography = "cbsa", variables = "B01003_001" , year = 2021, survey = "acs5")
+cbsa_data= cbsa_data |>
+  rename(cbsa_code = GEOID, cbsa_pop = estimate)
+
+```
+
+```{r}
+origin_data = cbsa_data |>
+  rename(origin_cbsa_pop = cbsa_pop, origin_cbsa = cbsa_code)
+dest_data = cbsa_data |>
+  rename(dest_cbsa_pop = cbsa_pop, dest_cbsa = cbsa_code)
+```
+
+```{r}
+air_traffic = air_traffic |>
+  mutate(origin_cbsa = as.character(origin_cbsa),
+  dest_cbsa = as.character(dest_cbsa))
+  
+  origin_data = origin_data |>
+    mutate(origin_cbda = as.character(origin_cbsa))
+  
+  dest_data = dest_data |>
+    mutate(dest_cbsa = as.character(dest_cbsa))
+  
+  cbsa_data = cbsa_data |>
+    mutate(cbsa_code = as.character(cbsa_code))
+
+
+```
+
+```{r}
+air_traffic_cbsa = air_traffic |>
+  left_join(origin_data, by = "origin_cbsa") |>
+  left_join(dest_data, by = "dest_cbsa") |>
+ group_by(origin_cbsa, dest_cbsa) |>
+ summarize(total_passengers = sum (passengers, na.rm = T), .groups = "drop")
+    
+ 
+passenger_summary = air_traffic |>
+  group_by(origin_cbsa, dest_cbsa) |>
+  summarize(total_passengers = sum(passengers, na.rm = TRUE), .groups = "drop")
+
+
+distance_data = air_traffic |>
+  select(origin_cbsa, dest_cbsa, distancemiles)|>
+  distinct()
+
+# Step 3: Join the passenger summary with distance data
+air_traffic_cbsa = passenger_summary |>
+  left_join(distance_data, by = c("origin_cbsa", "dest_cbsa"))
+
+```
+
+```{r}
+ggplot(air_traffic_cbsa, aes(x = origin_cbsa , y = total_passengers)) + 
+  geom_point() + labs(title = "Origin Population vs Total Passengers")
+```
+
+```{r}
+ggplot(air_traffic_cbsa, aes(x = dest_cbsa, y = total_passengers)) + 
+  geom_point() +  labs(title = "Destination Population vs Total Passengers")
+```
+
+```{r}
+ggplot(air_traffic_cbsa, aes(x = distancemiles, y = total_passengers)) + 
+  geom_point() + labs(title = "Distance vs Total Passengers")
+
+```
+
+
+```{r}
+model = lm(total_passengers ~ origin_cbsa + dest_cbsa + distancemiles, data = air_traffic_cbsa)
+summary(model)
+```
+
+```{r}
+rdu_cbsa_code = "39580"
+rdu_pop = 2368947
+```
+
+```{r}
+new_routes = data.frame(
+  origin_cbsa = rdu_cbsa_code,
+  dest_cbsa = c("42660", "21340", "45220", "40900"),
+  distancemiles = c(2363, 1606, 496, 2345),
+  origin_cbsa_pop = rdu_pop,  
+  dest_cbsa_pop = c(630498, 884432, 202221, 526384)  
+)
+
+```
+
+
+```{r}
+reversed_routes <- data.frame(
+  origin_cbsa = new_routes$dest_cbsa,
+  dest_cbsa = new_routes$origin_cbsa,
+  distancemiles = new_routes$distancemiles,
+  origin_cbsa_pop = new_routes$dest_cbsa_pop,
+  dest_cbsa_pop = new_routes$origin_cbsa_pop
+)
+new_routes_bidirectional = rbind(new_routes, reversed_routes)
+```
+
+```{r}
+print(new_routes_bidirectional)
+```
+
+```{r}
+new_routes_bidirectional$predicted_passengers = predict(model, newdata = new_routes_bidirectional)
+
+```
+
+```{r}
+
+demand_table <- new_routes_bidirectional[
+  order(-new_routes_bidirectional$predicted_passengers), 
+  c("origin_cbsa", "dest_cbsa", "distancemiles", "predicted_passengers")
+] 
+
+
+print(demand_table)
+
+```
+
+```{r}
+
+model_summary = summary(model)
+print(model_summary)
+
+
+r_squared = model_summary$r.squared
+print(paste("R-squared:", r_squared))
+
+```
